@@ -111,7 +111,6 @@ public class PlayerMovement : MonoBehaviour
         playerRb.velocity = new Vector3(playerRb.velocity.x, 0f, playerRb.velocity.z);
 
         playerRb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
-        print("Jump");
     }
 
     private IEnumerator IResetJumpState()
