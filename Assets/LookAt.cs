@@ -12,10 +12,6 @@ public class LookAt : MonoBehaviour
 
     void Update()
     {
-        Vector3 dir = (playerTransform.position - transform.position).normalized;
 
-        float angle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
-        
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.up);
     }
 }

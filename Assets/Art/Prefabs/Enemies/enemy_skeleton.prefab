@@ -627,6 +627,8 @@ GameObject:
   - component: {fileID: 9542308}
   - component: {fileID: 2793914277913677546}
   - component: {fileID: 4995573074545022520}
+  - component: {fileID: 1985068332}
+  - component: {fileID: 1985068333}
   m_Layer: 0
   m_Name: enemy_skeleton
   m_TagString: Untagged
@@ -700,6 +702,47 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.6528902, y: 1.5237926, z: 0.41372105}
   m_Center: {x: 0, y: 0.7584889, z: 0}
+--- !u!195 &1985068332
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165424}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.3
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 2
+--- !u!114 &1985068333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b618dd21c8350034ca3849f4a6beb98a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 0}
+  playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  sightRange: 10
+  attackRange: 7
+  attackInterval: 1
 --- !u!1 &165938
 GameObject:
   m_ObjectHideFlags: 0
