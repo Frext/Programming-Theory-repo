@@ -1959,7 +1959,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 414634199}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Orientation Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5176,7 +5176,7 @@ GameObject:
   - component: {fileID: 1206218915}
   - component: {fileID: 1206218916}
   - component: {fileID: 1206218917}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5830,7 +5830,7 @@ GameObject:
   - component: {fileID: 1321604473}
   - component: {fileID: 1321604472}
   - component: {fileID: 1321604471}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6625,7 +6625,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1528148653}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Camera Placeholder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8124,7 +8124,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 403496, guid: 9f4313a771e05c64d8da7ae6bd19a19f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 12.19
+      value: 54.32
       objectReference: {fileID: 0}
     - target: {fileID: 403496, guid: 9f4313a771e05c64d8da7ae6bd19a19f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8153,14 +8153,6 @@ PrefabInstance:
     - target: {fileID: 403496, guid: 9f4313a771e05c64d8da7ae6bd19a19f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1985068333, guid: 9f4313a771e05c64d8da7ae6bd19a19f, type: 3}
-      propertyPath: sightRange
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1985068333, guid: 9f4313a771e05c64d8da7ae6bd19a19f, type: 3}
-      propertyPath: attackRange
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1985068333, guid: 9f4313a771e05c64d8da7ae6bd19a19f, type: 3}
       propertyPath: playerTransform

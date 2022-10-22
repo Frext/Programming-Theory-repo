@@ -740,9 +740,8 @@ MonoBehaviour:
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  sightRange: 10
-  attackRange: 7
-  attackInterval: 1
+  sightRange: 30
+  attackRange: 3
 --- !u!1 &165938
 GameObject:
   m_ObjectHideFlags: 0
