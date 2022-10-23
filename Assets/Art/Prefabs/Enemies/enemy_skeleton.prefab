@@ -624,12 +624,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 403496}
-  - component: {fileID: 9542308}
   - component: {fileID: 2793914277913677546}
   - component: {fileID: 4995573074545022520}
+  - component: {fileID: 9542308}
   - component: {fileID: 1985068332}
   - component: {fileID: 1985068333}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: enemy_skeleton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -653,26 +653,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &9542308
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 165424}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: f3392e95529ae7540ad53657e3d0ce7d, type: 3}
-  m_Controller: {fileID: 9100000, guid: ce1dbe3b5240d7743a09371ca1ef56cb, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!54 &2793914277913677546
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -702,6 +682,26 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.6528902, y: 1.5237926, z: 0.41372105}
   m_Center: {x: 0, y: 0.7584889, z: 0}
+--- !u!95 &9542308
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165424}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: f3392e95529ae7540ad53657e3d0ce7d, type: 3}
+  m_Controller: {fileID: 9100000, guid: ce1dbe3b5240d7743a09371ca1ef56cb, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!195 &1985068332
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -741,7 +741,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   sightRange: 30
-  attackRange: 3
+  attackRange: 2.5
 --- !u!1 &165938
 GameObject:
   m_ObjectHideFlags: 0

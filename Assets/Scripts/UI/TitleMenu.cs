@@ -1,11 +1,14 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TitleMenu : MonoBehaviour
+namespace UI
 {
-    // This is used by the play button.
-    public void GoToNextScene()
+    public class TitleMenu : MonoBehaviour
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        // This is used by the play button.
+        public void GoToNextScene()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
 }
