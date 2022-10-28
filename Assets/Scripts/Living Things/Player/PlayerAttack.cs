@@ -32,9 +32,7 @@ namespace Living_Things
             PlayAttackAnimation();
 
             EnableAttacking();
-            
-            // DEAL DAMAGE
-            
+
             Invoke(nameof(DisableAttacking), 0.5f);
         }
 
