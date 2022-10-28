@@ -4,23 +4,17 @@ using UnityEngine.AI;
 namespace Living_Things.Enemy
 {
     [RequireComponent(typeof(NavMeshAgent), typeof(Animator))]
-    public class FollowPlayer : MonoBehaviour
+    public class ChasePlayer : MonoBehaviour
     {
-        [Header("Player")]
+        [Header("Player")] 
         [SerializeField] private Transform playerTransform;
         [SerializeField] private LayerMask playerLayerMask;
-    
-        [Header("Range")]
+
+        [Header("Range")] 
         [SerializeField] private float sightRange = 30f;
-        [SerializeField] private float attackRange = 7f;
 
         private NavMeshAgent agent;
         private Animator animator;
-
-        private enum EnemyAnimations {
-            Walk,
-            Attack
-        }
 
         void Start()
         {
@@ -30,7 +24,7 @@ namespace Living_Things.Enemy
 
         void Update()
         {
-            HandleAnimation(EnemyAnimations.Walk);
+            HandleWalkAnimation();
         }
 
         void FixedUpdate()
@@ -41,18 +35,10 @@ namespace Living_Things.Enemy
 
         private void HandleStates()
         {
-            if (IsPlayerInAttackRange())
+            if (IsPlayerInSightRange())
             {
                 LookAtPlayer();
-                
-                ChangeDestination(transform.position);
-                HandleAnimation(EnemyAnimations.Attack);
-                // TODO: AttackScript.Attack()
-            }
-            else if (IsPlayerInSightRange())
-            {
-                LookAtPlayer();
-                
+
                 ChangeDestination(playerTransform.position);
             }
             else
@@ -66,24 +52,14 @@ namespace Living_Things.Enemy
             return Physics.CheckSphere(transform.position, sightRange, playerLayerMask);
         }
 
-        private bool IsPlayerInAttackRange()
-        {
-            return Physics.CheckSphere(transform.position, attackRange, playerLayerMask);
-        }
-
         private void ChangeDestination(Vector3 destination)
         {
             agent.SetDestination(destination);
         }
 
-        private void HandleAnimation(EnemyAnimations enemyAnimation)
+        private void HandleWalkAnimation()
         {
-            if (enemyAnimation == EnemyAnimations.Walk) {
-                animator.SetFloat("speed", agent.velocity.magnitude);
-            }
-            if(enemyAnimation == EnemyAnimations.Attack) {
-                animator.SetTrigger("attack");
-            }
+            animator.SetFloat("speed", agent.velocity.magnitude);
         }
 
         private void LookAtPlayer()
@@ -95,7 +71,7 @@ namespace Living_Things.Enemy
 
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.up);
             */
-            
+
             transform.LookAt(playerTransform.position, Vector3.up);
         }
     }

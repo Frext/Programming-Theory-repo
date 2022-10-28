@@ -19,36 +19,25 @@ namespace Living_Things
 
         private void GetAttackInput()
         {
-            if (Input.GetMouseButtonDown(0) && timePassed < Time.time)
-            {
-                Attack();
-
-                timePassed = attackCooldown + Time.time;
-            }
+            Attack();
         }
 
         protected override void Attack()
         {
-            PlayAttackAnimation();
+            if (Input.GetMouseButtonDown(0) && timePassed < Time.time)
+            {
+                PlayAttackAnimation();
 
-            EnableAttacking();
-
-            Invoke(nameof(DisableAttacking), 0.5f);
+                EnableAttacking();
+                Invoke(nameof(DisableAttacking), attackCooldown / 2);
+                
+                timePassed = attackCooldown + Time.time;
+            }
         }
 
         protected override void PlayAttackAnimation()
         {
             animator.SetTrigger("attack_01");
-        }
-
-        private void EnableAttacking()
-        {
-            weaponCollider.enabled = true;
-        }
-
-        private void DisableAttacking()
-        {
-            weaponCollider.enabled = false;
         }
     }
 }

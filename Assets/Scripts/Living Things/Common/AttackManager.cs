@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Living_Things
@@ -10,13 +11,34 @@ namespace Living_Things
         [Space]
         [SerializeField] protected float attackCooldown;
 
+
         protected abstract void Attack();
 
         protected abstract void PlayAttackAnimation();
 
-        protected virtual void DealDamage(GameObject objectToDealDamage,int damageAmount)
+        public void DealDamage(GameObject callerObject,GameObject objectToDealDamage,int damageAmount)
         {
-            objectToDealDamage.GetComponent<HealthManager>().GetDamage(damageAmount);
+            if (objectToDealDamage != callerObject && objectToDealDamage != null)
+            {
+                print("Attacker : " + callerObject.name + "Victim : " + objectToDealDamage.name);
+
+                HealthManager healthManager = objectToDealDamage.GetComponent<HealthManager>();
+                
+                if (healthManager != null)
+                {
+                    healthManager.GetDamage(damageAmount);
+                }
+            }
+        }
+
+        protected void EnableAttacking()
+        {
+            weaponCollider.enabled = true;
+        }
+
+        protected void DisableAttacking()
+        {
+            weaponCollider.enabled = false;
         }
     }
 }

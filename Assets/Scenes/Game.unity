@@ -2154,11 +2154,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraPlaceholderPosition: {fileID: 1528148653}
---- !u!1 &343103987 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3213851043470871558, guid: 54c8c9f221349f5478057c6aa027be04, type: 3}
-  m_PrefabInstance: {fileID: 554381350}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &347498752
 GameObject:
   m_ObjectHideFlags: 0
@@ -3261,6 +3256,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1861854935}
     m_Modifications:
+    - target: {fileID: 554381360, guid: 54c8c9f221349f5478057c6aa027be04, type: 3}
+      propertyPath: attackerBody
+      value: 
+      objectReference: {fileID: 1321604470}
+    - target: {fileID: 554381360, guid: 54c8c9f221349f5478057c6aa027be04, type: 3}
+      propertyPath: attackManager
+      value: 
+      objectReference: {fileID: 1206218918}
     - target: {fileID: 2869413995942106812, guid: 54c8c9f221349f5478057c6aa027be04, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -3321,20 +3324,11 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 554381354, guid: 54c8c9f221349f5478057c6aa027be04, type: 3}
   m_PrefabInstance: {fileID: 554381350}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &554381357
+--- !u!64 &554381357 stripped
 MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 554381357, guid: 54c8c9f221349f5478057c6aa027be04, type: 3}
+  m_PrefabInstance: {fileID: 554381350}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 343103987}
-  m_Material: {fileID: 13400000, guid: 90a9ba80d302db2498fea3a0cf17e56a, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2763774367042099228, guid: 26430834ea307e24083f9e03d7fc4f0f, type: 3}
 --- !u!1001 &562609739
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6911,6 +6905,7 @@ GameObject:
   - component: {fileID: 1206218916}
   - component: {fileID: 1206218917}
   - component: {fileID: 1206218918}
+  - component: {fileID: 1206218919}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -6989,6 +6984,19 @@ MonoBehaviour:
   animator: {fileID: 554381354}
   weaponCollider: {fileID: 554381357}
   attackCooldown: 0.75
+--- !u!114 &1206218919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206218914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b263ce11d95768478711abcf710034c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialHealth: 10
 --- !u!1001 &1214776226
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7380,7 +7388,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: ca6a542169d8e474aa2c2cb47423839a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 9.32
+      value: 10.73
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: ca6a542169d8e474aa2c2cb47423839a, type: 3}
       propertyPath: m_LocalRotation.w
