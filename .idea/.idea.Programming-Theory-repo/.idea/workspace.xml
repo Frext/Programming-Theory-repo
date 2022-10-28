@@ -12,6 +12,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/24d45e813e524a99bfb7a145158a7980157a00/78/a584b269/MonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Living Things/Common/SwordAttackHandler.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -88,7 +89,9 @@
       <workItem from="1666453544702" duration="114000" />
       <workItem from="1666465777698" duration="1628000" />
       <workItem from="1666522542436" duration="18000" />
-      <workItem from="1666725298796" duration="288000" />
+      <workItem from="1666725298796" duration="900000" />
+      <workItem from="1666842052464" duration="375000" />
+      <workItem from="1666928378660" duration="350000" />
     </task>
     <servers />
   </component>

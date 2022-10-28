@@ -4,11 +4,12 @@ using UnityEngine.AI;
 namespace Living_Things.Enemy
 {
     [RequireComponent(typeof(NavMeshAgent), typeof(Animator))]
-    public class FollowPlayer : MonoBehaviour
+    public class ChasePlayer : MonoBehaviour
     {
         [Header("Player")]
         [SerializeField] private Transform playerTransform;
         [SerializeField] private LayerMask playerLayerMask;
+        [SerializeField] private EnemyAttack enemyAttackScript;
     
         [Header("Range")]
         [SerializeField] private float sightRange = 30f;
@@ -16,11 +17,6 @@ namespace Living_Things.Enemy
 
         private NavMeshAgent agent;
         private Animator animator;
-
-        private enum EnemyAnimations {
-            Walk,
-            Attack
-        }
 
         void Start()
         {
@@ -30,7 +26,7 @@ namespace Living_Things.Enemy
 
         void Update()
         {
-            HandleAnimation(EnemyAnimations.Walk);
+            HandleAnimation();
         }
 
         void FixedUpdate()
@@ -45,9 +41,10 @@ namespace Living_Things.Enemy
             {
                 LookAtPlayer();
                 
+                // Stop to attack when nearby the player
                 ChangeDestination(transform.position);
-                HandleAnimation(EnemyAnimations.Attack);
-                // TODO: AttackScript.Attack()
+
+//                enemyAttackScript.Attack()
             }
             else if (IsPlayerInSightRange())
             {
@@ -76,14 +73,9 @@ namespace Living_Things.Enemy
             agent.SetDestination(destination);
         }
 
-        private void HandleAnimation(EnemyAnimations enemyAnimation)
+        private void HandleAnimation()
         {
-            if (enemyAnimation == EnemyAnimations.Walk) {
-                animator.SetFloat("speed", agent.velocity.magnitude);
-            }
-            if(enemyAnimation == EnemyAnimations.Attack) {
-                animator.SetTrigger("attack");
-            }
+            animator.SetFloat("speed", agent.velocity.magnitude);
         }
 
         private void LookAtPlayer()

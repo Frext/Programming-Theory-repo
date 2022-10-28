@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Living_Things
+namespace Living_Things.Player
 {
     public class PlayerAttack : AttackManager
     {
