@@ -1,5 +1,4 @@
-using System;
-using Unity.VisualScripting;
+using Living_Things.Common;
 using UnityEngine;
 
 namespace Living_Things.Enemy

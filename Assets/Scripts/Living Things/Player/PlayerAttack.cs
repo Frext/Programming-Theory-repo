@@ -1,6 +1,7 @@
 using UnityEngine;
+using Living_Things.Common;
 
-namespace Living_Things
+namespace Living_Things.Player
 {
     public class PlayerAttack : AttackManager
     {

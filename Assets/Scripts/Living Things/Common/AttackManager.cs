@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace Living_Things
+namespace Living_Things.Common
 {
     public abstract class AttackManager : MonoBehaviour
     {
@@ -20,12 +19,13 @@ namespace Living_Things
         {
             if (objectToDealDamage != callerObject && objectToDealDamage != null)
             {
-                print("Attacker : " + callerObject.name + "Victim : " + objectToDealDamage.name);
-
                 HealthManager healthManager = objectToDealDamage.GetComponent<HealthManager>();
                 
                 if (healthManager != null)
                 {
+                    print("Attacker : " + callerObject.name + " Victim : " + objectToDealDamage.name);
+                    print(healthManager.gameObject.name);
+                    
                     healthManager.GetDamage(damageAmount);
                 }
             }

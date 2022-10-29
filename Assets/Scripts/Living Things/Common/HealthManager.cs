@@ -1,10 +1,15 @@
 using UnityEngine;
+using UnityEngine.UI;
 
-namespace Living_Things
+namespace Living_Things.Common
 {
+    // A collider is required for the object the health manager is in,
+    // because the swords get the health manager reference from the collided object. 
+    [RequireComponent(typeof(Collider))]
     public class HealthManager : MonoBehaviour
     {
         [SerializeField] private int initialHealth;
+        [SerializeField] private Image healthBar;
 
         // ENCAPSULATION
         private int _health;
@@ -14,13 +19,18 @@ namespace Living_Things
             get => _health;
             set
             {
-                if (value >= 0)
-                {
-                    _health = value;
-                }
+                _health = Mathf.Clamp(value, 0, int.MaxValue);
+
+                UpdateHealthBar();
             }
+            
         }
-    
+
+        private void UpdateHealthBar()
+        {
+            healthBar.fillAmount = (float)Health / initialHealth;
+        }
+
         void Start()
         {
             Health = initialHealth;

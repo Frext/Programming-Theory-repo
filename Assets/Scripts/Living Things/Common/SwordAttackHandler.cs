@@ -1,5 +1,3 @@
-using System;
-using Living_Things.Enemy;
 using UnityEngine;
 
 namespace Living_Things.Common
