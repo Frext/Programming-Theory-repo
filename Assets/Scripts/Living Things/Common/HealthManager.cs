@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Living_Things.Common
@@ -10,6 +11,9 @@ namespace Living_Things.Common
     {
         [SerializeField] private int initialHealth;
         [SerializeField] private Image healthBar;
+
+        [Space] 
+        [SerializeField] private UnityEvent onDie;
 
         // ENCAPSULATION
         private int _health;
@@ -39,6 +43,16 @@ namespace Living_Things.Common
         public void GetDamage(int damageAmount)
         {
             Health -= damageAmount;
+
+            InvokeOnDieEvent();
+        }
+
+        private void InvokeOnDieEvent()
+        {
+            if (Health == 0)
+            {
+                onDie.Invoke();
+            }
         }
     }
 }

@@ -13,14 +13,15 @@ namespace Living_Things.Enemy
         
         
         float timePassed;
-
+        
+        static readonly int Attack1 = Animator.StringToHash("attack");
         
         void Start()
         {
             DisableAttacking();
         }
 
-        void Update()
+        void FixedUpdate()
         {
             if (IsPlayerInAttackRange())
             {
@@ -30,20 +31,20 @@ namespace Living_Things.Enemy
 
         protected override void Attack()
         {
-            if (timePassed < Time.time)
+            if (timePassed < Time.fixedTime)
             {
                 PlayAttackAnimation();
 
                 EnableAttacking();
                 Invoke(nameof(DisableAttacking), attackCooldown / 2);
 
-                timePassed = attackCooldown + Time.time;
+                timePassed = attackCooldown + Time.fixedTime;
             }
         }
 
         protected override void PlayAttackAnimation()
         {
-            animator.SetTrigger("attack");
+            animator.SetTrigger(Attack1);
         }
         
         private bool IsPlayerInAttackRange()

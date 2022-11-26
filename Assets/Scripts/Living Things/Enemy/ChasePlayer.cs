@@ -3,24 +3,25 @@ using UnityEngine.AI;
 
 namespace Living_Things.Enemy
 {
-    [RequireComponent(typeof(NavMeshAgent), typeof(Animator))]
+    [RequireComponent(typeof(Animator))]
     public class ChasePlayer : MonoBehaviour
     {
         [Header("Player")] 
         [SerializeField] private Transform playerTransform;
         [SerializeField] private LayerMask playerLayerMask;
-
-        [Header("Range")] 
+        
+        [Space]
         [SerializeField] private float sightRange = 30f;
+        
+        [Space]
+        [SerializeField] private NavMeshAgent agent;
+        
+        [Header("Animation")]
+        [SerializeField] private Animator animator;
+        [Tooltip("This is the name of the attack state in the animator. It's used to restrict movement while attacking.")]
+        [SerializeField] private string attackStateName;
 
-        private NavMeshAgent agent;
-        private Animator animator;
-
-        void Start()
-        {
-            agent = GetComponent<NavMeshAgent>();
-            animator = GetComponent<Animator>();
-        }
+        static readonly int Speed = Animator.StringToHash("speed");
 
         void Update()
         {
@@ -38,13 +39,18 @@ namespace Living_Things.Enemy
             if (IsPlayerInSightRange())
             {
                 LookAtPlayer();
-
-                ChangeDestination(playerTransform.position);
+                
+                // If the enemy is attacking, don't move the enemy. If not, move the enemy
+                ChangeDestination(animator.GetCurrentAnimatorStateInfo(0).IsName(attackStateName)
+                    ? transform.position
+                    : playerTransform.position);
             }
+            /* If the player disappears, stop
             else
             {
                 ChangeDestination(transform.position);
             }
+            */
         }
 
         private bool IsPlayerInSightRange()
@@ -59,7 +65,7 @@ namespace Living_Things.Enemy
 
         private void HandleWalkAnimation()
         {
-            animator.SetFloat("speed", agent.velocity.magnitude);
+            animator.SetFloat(Speed, agent.velocity.magnitude);
         }
 
         private void LookAtPlayer()

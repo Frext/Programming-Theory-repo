@@ -8,6 +8,7 @@ namespace Living_Things.Common
         [SerializeField] protected Collider weaponCollider;
 
         [Space]
+        [Range(0, 5)]
         [SerializeField] protected float attackCooldown;
 
 
@@ -23,9 +24,6 @@ namespace Living_Things.Common
                 
                 if (healthManager != null)
                 {
-                    print("Attacker : " + callerObject.name + " Victim : " + objectToDealDamage.name);
-                    print(healthManager.gameObject.name);
-                    
                     healthManager.GetDamage(damageAmount);
                 }
             }
