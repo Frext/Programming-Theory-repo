@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 1188368964173355289}
   - component: {fileID: 4006259797194583507}
   - component: {fileID: 554381354}
+  - component: {fileID: 8022809806835387009}
+  - component: {fileID: 554381360}
   m_Layer: 6
   m_Name: Sword01_Red
   m_TagString: Untagged
@@ -97,10 +99,38 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 7fd544492e4260640932ca87e5830ed5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &8022809806835387009
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3213851043470871558}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.49828613, y: 1.8996173, z: 0.5301684}
+  m_Center: {x: 0.02116748, y: 1.0161492, z: -0.22653721}
+--- !u!114 &554381360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3213851043470871558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fa4d1b2455add64d8c61aae128ef6fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 3
+  attackManager: {fileID: 0}
+  attackerBody: {fileID: 0}
