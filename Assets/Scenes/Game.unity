@@ -106,15 +106,15 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 0.3
-    agentHeight: 2
+    agentRadius: 0.5
+    agentHeight: 1.5
     agentSlope: 25
     agentClimb: 0.4
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.1
+    cellSize: 0.16666667
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
@@ -6940,7 +6940,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1206218914}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.59, z: 0}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6978,9 +6978,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0cff84eee772024bad6019b58575f44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 16
+  moveSpeed: 15
   orientation: {fileID: 414634199}
-  jumpForce: 9.25
+  jumpForce: 8.75
   jumpCooldown: 0.875
   fallMultiplier: 2
   airMultiplier: 0.25
@@ -10504,7 +10504,7 @@ PrefabInstance:
     - target: {fileID: 1985068333, guid: 9f4313a771e05c64d8da7ae6bd19a19f, type: 3}
       propertyPath: playerTransform
       value: 
-      objectReference: {fileID: 1206218915}
+      objectReference: {fileID: 1321604474}
     - target: {fileID: 4026350306448265285, guid: 9f4313a771e05c64d8da7ae6bd19a19f, type: 3}
       propertyPath: m_Camera
       value: 

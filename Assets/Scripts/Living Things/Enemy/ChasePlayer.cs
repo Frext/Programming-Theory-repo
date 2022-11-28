@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -45,12 +46,7 @@ namespace Living_Things.Enemy
                     ? transform.position
                     : playerTransform.position);
             }
-            /* If the player disappears, stop
-            else
-            {
-                ChangeDestination(transform.position);
-            }
-            */
+            // If the player disappears, move the enemy to the last sighted point
         }
 
         private bool IsPlayerInSightRange()
@@ -60,7 +56,11 @@ namespace Living_Things.Enemy
 
         private void ChangeDestination(Vector3 destination)
         {
-            agent.SetDestination(destination);
+            while (true)
+            {
+                if (agent.SetDestination(destination))
+                    break;
+            }
         }
 
         private void HandleWalkAnimation()
@@ -70,15 +70,12 @@ namespace Living_Things.Enemy
 
         private void LookAtPlayer()
         {
-            /*
+            // I didn't use the transform.LookAt method because we need a look rotation on the y-axis.
             Vector3 dir = (playerTransform.position - transform.position).normalized;
 
             float angle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
-
+            
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.up);
-            */
-
-            transform.LookAt(playerTransform.position, Vector3.up);
         }
     }
 }
