@@ -9,6 +9,7 @@ namespace Living_Things.Player
         [Header("Movement")]
         [Range(0, 30)]
         [SerializeField] private float moveSpeed;
+        [Tooltip("The orientation object is used by the camera controller.")]
         [SerializeField] private Transform orientation;
 
         [Header("Jump")]

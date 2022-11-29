@@ -70,12 +70,19 @@ namespace Living_Things.Enemy
 
         private void LookAtPlayer()
         {
-            // I didn't use the transform.LookAt method because we need a look rotation on the y-axis.
+            /*
             Vector3 dir = (playerTransform.position - transform.position).normalized;
 
             float angle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
             
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.up);
+            */
+            
+            // I didn't use player transform straightaway because we need a look rotation just on the y-axis.
+            Vector3 targetPosition = playerTransform.position;
+            targetPosition.y = 0;
+            
+            transform.LookAt(new Vector3(targetPosition.x, 0, targetPosition.z));
         }
     }
 }
