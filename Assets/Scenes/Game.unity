@@ -6978,7 +6978,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0cff84eee772024bad6019b58575f44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 15
+  moveSpeed: 12
   orientation: {fileID: 414634199}
   jumpForce: 8.75
   jumpCooldown: 0.875
@@ -7025,7 +7025,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 413006, guid: 80afb8f52d27bae4f8ff4cf083945861, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 413006, guid: 80afb8f52d27bae4f8ff4cf083945861, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7059,6 +7059,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1210789481, guid: 80afb8f52d27bae4f8ff4cf083945861, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 1321604474}
+    - target: {fileID: 4026350304766865520, guid: 80afb8f52d27bae4f8ff4cf083945861, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 963194227}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80afb8f52d27bae4f8ff4cf083945861, type: 3}
 --- !u!4 &1210789477 stripped
@@ -7811,7 +7819,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b263ce11d95768478711abcf710034c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialHealth: 10
+  initialHealth: 20
   healthBar: {fileID: 5934825044879805831}
   onDie:
     m_PersistentCalls:
