@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace Living_Things.Common
@@ -7,25 +8,36 @@ namespace Living_Things.Common
     public class MeleeAttackHandler : MonoBehaviour
     {
         [SerializeField] private int attackDamage;
+        [SerializeField] private LayerMask attackLayers;
+        
         [SerializeField] private AttackManager attackManager;
 
-        [Space] [Tooltip("This is used for the weapon not to injure its owner.")] [SerializeField]
-        private GameObject attackerBody;
-
+        [Space]
+        [Tooltip("This is used for the weapon not to injure its owner. The game object with the health script must be given.")] 
+        [SerializeField] private GameObject attackerColliderBody;
+        
+        
         // These parameters helps checking if a swung sword enters the enemy body more than once.
-        float attackIntervalTime = 0.4f;
+        readonly float attackIntervalTime = 0.4f;
         bool canAttack = true;
 
         private void OnTriggerEnter(Collider other)
         {
-            if (canAttack)
+            if (canAttack && IsInAttackLayers(other.gameObject.layer))
             {
-                attackManager.DealDamage(attackerBody, other.gameObject, attackDamage);
+                bool didDealDamage = attackManager.DealDamage(attackerColliderBody, other.gameObject, attackDamage);
 
-                canAttack = false;
-                
+                if (didDealDamage)
+                    canAttack = false;
+
                 StartCoroutine(IResetAttackState());
             }
+        }
+
+        private bool IsInAttackLayers(int layer)
+        {
+            // Returns true if the layer that is converted into a layer mask and the attack layer mask have a common bit which is 1.
+            return (attackLayers & (1 << layer)) != 0;
         }
 
         IEnumerator IResetAttackState()

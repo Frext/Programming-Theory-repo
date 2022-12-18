@@ -726,7 +726,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 0}
-  playerLayerMask:
+  _playerLayerMask:
     serializedVersion: 2
     m_Bits: 128
   sightRange: 30
@@ -745,13 +745,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36521e04dbc1bbd4a830dfa10d8891b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 9542308}
+  weaponAnimator: {fileID: 9542308}
   weaponCollider: {fileID: 1385927943}
   attackCooldown: 1
-  playerLayerMask:
-    serializedVersion: 2
-    m_Bits: 128
   attackRange: 2
+  isAttackArea: 0
+  attackDelay: 0
+  chasePlayerScript: {fileID: 1985068333}
 --- !u!1 &165938
 GameObject:
   m_ObjectHideFlags: 0
@@ -1050,8 +1050,8 @@ GameObject:
   - component: {fileID: 1385927942}
   - component: {fileID: 1385927943}
   - component: {fileID: 1385927944}
-  m_Layer: 0
-  m_Name: Sword Collider
+  m_Layer: 6
+  m_Name: Attack Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1098,8 +1098,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 3
+  attackLayers:
+    serializedVersion: 2
+    m_Bits: 128
   attackManager: {fileID: 1985068328}
-  attackerBody: {fileID: 165424}
+  attackerColliderBody: {fileID: 5094438004392994175}
 --- !u!1 &5094438004392994175
 GameObject:
   m_ObjectHideFlags: 0

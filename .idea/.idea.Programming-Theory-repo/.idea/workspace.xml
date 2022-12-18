@@ -13,6 +13,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/24d45e813e524a99bfb7a145158a7980157a00/78/a584b269/MonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Living Things/Enemy/EnemyAttack.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Editor/UI/InputFieldEditor.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/VertexModifiers/Outline.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -110,6 +111,17 @@
       <workItem from="1669837309513" duration="955000" />
       <workItem from="1669920457609" duration="551000" />
       <workItem from="1669921458734" duration="654000" />
+      <workItem from="1670049844206" duration="1103000" />
+      <workItem from="1670437247880" duration="3316000" />
+      <workItem from="1670620946270" duration="2796000" />
+      <workItem from="1670683857597" duration="2741000" />
+      <workItem from="1670686702145" duration="109000" />
+      <workItem from="1670762116648" duration="1899000" />
+      <workItem from="1671127707689" duration="2730000" />
+      <workItem from="1671274632772" duration="1085000" />
+      <workItem from="1671276283970" duration="856000" />
+      <workItem from="1671373783921" duration="3637000" />
+      <workItem from="1671377463219" duration="78000" />
     </task>
     <servers />
   </component>

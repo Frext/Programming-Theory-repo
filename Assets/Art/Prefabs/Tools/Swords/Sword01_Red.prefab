@@ -132,5 +132,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 3
+  attackLayers:
+    serializedVersion: 2
+    m_Bits: 256
   attackManager: {fileID: 0}
-  attackerBody: {fileID: 0}
+  attackerColliderBody: {fileID: 0}

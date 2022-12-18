@@ -7,12 +7,6 @@ namespace Living_Things.Player
     {
         float timePassed;
 
-
-        void Start()
-        {
-            DisableAttacking();
-        }
-
         void Update()
         {
             GetAttackInput();
@@ -38,7 +32,7 @@ namespace Living_Things.Player
 
         protected override void PlayAttackAnimation()
         {
-            animator.SetTrigger("attack_01");
+            weaponAnimator.SetTrigger("attack_01");
         }
     }
 }
