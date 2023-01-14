@@ -51,7 +51,7 @@ namespace Living_Things.Enemy
                 LookAtPlayer();
                 
                 // If the enemy is currently attacking, don't move the enemy. If not, move the enemy
-                ChangeDestination(animator.GetCurrentAnimatorStateInfo(0).IsName(attackStateName)
+                agent.SetDestination(animator.GetCurrentAnimatorStateInfo(0).IsName(attackStateName)
                     ? transform.position
                     : playerTransform.position);
             }
@@ -69,15 +69,6 @@ namespace Living_Things.Enemy
             Vector3 targetRotation = (playerTransform.position - transform.position).normalized;
 
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(targetRotation), rotateSpeed);
-        }
-
-        private void ChangeDestination(Vector3 destination)
-        {
-            while (true)
-            {
-                if (agent.SetDestination(destination))
-                    break;
-            }
         }
     }
 }

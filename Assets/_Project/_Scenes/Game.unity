@@ -106,7 +106,7 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 0.5
+    agentRadius: 1
     agentHeight: 1.5
     agentSlope: 25
     agentClimb: 0.4
@@ -114,7 +114,7 @@ NavMeshSettings:
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.16666667
+    cellSize: 0.33333334
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: d7ede3acd8f37b84196814e4db99b4a7, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 1c2906fd35a0b5148b8cd9cbdc086386, type: 2}
 --- !u!1 &43516736
 GameObject:
   m_ObjectHideFlags: 0
@@ -623,6 +623,10 @@ PrefabInstance:
     - target: {fileID: 100008, guid: 1989787f5d4f08647a723f7cb7df5f05, type: 3}
       propertyPath: m_Name
       value: vehicles_pizza_car
+      objectReference: {fileID: 0}
+    - target: {fileID: 100008, guid: 1989787f5d4f08647a723f7cb7df5f05, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: 1989787f5d4f08647a723f7cb7df5f05, type: 3}
       propertyPath: m_RootOrder
@@ -1317,7 +1321,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 8db24802b0170464c9267f3c45e6f7ea, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 8db24802b0170464c9267f3c45e6f7ea, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1892,7 +1896,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1206218914}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.5, z: -121.02}
+  m_LocalPosition: {x: 0, y: 2.5, z: -5.61}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2771,7 +2775,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: 1989787f5d4f08647a723f7cb7df5f05, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -83.3
+      value: -82.3
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: 1989787f5d4f08647a723f7cb7df5f05, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3275,18 +3279,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4e3b8318a9112f24d84095e1a4d96ae0, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.4999999
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 4e3b8318a9112f24d84095e1a4d96ae0, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.4999999
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 4e3b8318a9112f24d84095e1a4d96ae0, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.4999999
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 4e3b8318a9112f24d84095e1a4d96ae0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 14.08
       objectReference: {fileID: 0}
@@ -3325,10 +3317,6 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 4e3b8318a9112f24d84095e1a4d96ae0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 4e3b8318a9112f24d84095e1a4d96ae0, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e3b8318a9112f24d84095e1a4d96ae0, type: 3}

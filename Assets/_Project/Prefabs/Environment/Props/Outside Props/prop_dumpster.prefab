@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 3300000}
   - component: {fileID: 2300000}
   - component: {fileID: 2015029161}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: prop_dumpster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &400000
@@ -91,7 +91,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100000}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 90a9ba80d302db2498fea3a0cf17e56a, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
