@@ -1998,7 +1998,8 @@ MonoBehaviour:
   characterAnimator: {fileID: 7033455320432561726}
   characterAttackParamName: attack
   weaponCollider: {fileID: 8279187227318666576}
-  attackCooldown: 1
+  attackColliderEnableDelay: 0.1
+  attackCooldown: 1.1
 --- !u!1 &4126164719873952329
 GameObject:
   m_ObjectHideFlags: 0
@@ -2217,9 +2218,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.31575865
-  m_Height: 1.9028267
+  m_Height: 2.0241864
   m_Direction: 1
-  m_Center: {x: 0, y: 0.931916, z: -0.0053165145}
+  m_Center: {x: 0, y: 0.99259675, z: -0.0053165145}
 --- !u!136 &1418135574
 CapsuleCollider:
   m_ObjectHideFlags: 0

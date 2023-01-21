@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace _Project.Scripts.Gameplay.Characters.Common
@@ -11,13 +12,16 @@ namespace _Project.Scripts.Gameplay.Characters.Common
         [SerializeField] protected Collider weaponCollider;
 
         [Header("Attack Properties")]
-        [Range(0, 5)]
+        [Range(0, 10)]
+        [SerializeField] protected float attackColliderEnableDelay;
+        [Range(0, 10)]
         [SerializeField] protected float attackCooldown;
+
         
         protected void Start()
         {
             // Disable the collider at the beginning to avoid attacking all the time.
-            DisableAttacking();
+            StartCoroutine(IDisableAttacking(0));
         }
 
         protected abstract void Attack();
@@ -41,13 +45,17 @@ namespace _Project.Scripts.Gameplay.Characters.Common
             return false;
         }
 
-        protected void EnableAttacking()
+        protected IEnumerator IEnableAttacking(float delay)
         {
+            yield return new WaitForSeconds(delay);
+            
             weaponCollider.enabled = true;
         }
 
-        protected void DisableAttacking()
+        protected IEnumerator IDisableAttacking(float delay)
         {
+            yield return new WaitForSeconds(delay);
+            
             weaponCollider.enabled = false;
         }
     }

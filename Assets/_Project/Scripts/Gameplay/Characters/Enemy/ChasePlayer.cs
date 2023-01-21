@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -13,10 +12,7 @@ namespace _Project.Scripts.Gameplay.Characters.Enemy
 
         [SerializeField] private LayerMask _playerLayerMask;
         public LayerMask PlayerLayerMask => _playerLayerMask;
-        
-        [Tooltip("This is used to avoid enemies seeing the player through buildings or other obstacles.")]
-        [SerializeField] private LayerMask buildingLayerMask;
-        
+
         [Space]
         [SerializeField] private float sightRange = 30f;
         [Tooltip("The speed of rotating the enemy towards the player")]
@@ -27,7 +23,7 @@ namespace _Project.Scripts.Gameplay.Characters.Enemy
         [SerializeField] private NavMeshAgent agent;
         [SerializeField] private float playerChasingDurationAfterDisappearing;
 
-        float elapsedTime = 0f;
+        float elapsedTime = -1f;
         
         
         [Header("Animation")]
@@ -45,17 +41,14 @@ namespace _Project.Scripts.Gameplay.Characters.Enemy
         void Update()
         {
             HandleWalkAnimation();
+            
+            // ABSTRACTION
+            HandleStates();
         }
         
         private void HandleWalkAnimation()
         {
             animator.SetFloat(Speed, agent.velocity.magnitude);
-        }
-
-        void FixedUpdate()
-        {
-            // ABSTRACTION
-            HandleStates();
         }
 
         private void HandleStates()
@@ -66,6 +59,7 @@ namespace _Project.Scripts.Gameplay.Characters.Enemy
                 
                 elapsedTime = Time.time + playerChasingDurationAfterDisappearing;
             }
+            // If the game is just started, elapsedTime could be greater than Time.time accidentally.
             if (elapsedTime > Time.time)
             {
                 // If the enemy is currently attacking, don't move the enemy. If not, move the enemy
@@ -79,13 +73,12 @@ namespace _Project.Scripts.Gameplay.Characters.Enemy
         {
             RaycastHit raycastHit;
             
-
-            if (Physics.Raycast(transform.position + Vector3.up * 5, (playerTransform.position - transform.position).normalized * 100, out raycastHit, sightRange))
+            if (Physics.Raycast(transform.position + Vector3.up * 1, (playerTransform.position - transform.position).normalized, out raycastHit, sightRange))
             {
                 LayerMask layerHit = raycastHit.transform.gameObject.layer;
-                
+
                 // I compare the layer and not the game object because the collider can be in a separate game object rather than the player transform.
-                if (IsInLayer(PlayerLayerMask,layerHit) ||  !IsInLayer(buildingLayerMask, layerHit))
+                if (IsInLayer(PlayerLayerMask,layerHit))
                     return true;
             }
 

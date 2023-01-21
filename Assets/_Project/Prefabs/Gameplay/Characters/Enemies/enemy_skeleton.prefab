@@ -729,9 +729,6 @@ MonoBehaviour:
   _playerLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  buildingLayerMask:
-    serializedVersion: 2
-    m_Bits: 1
   sightRange: 50
   rotateSpeed: 0.25
   agent: {fileID: 5795848692299018179}
@@ -753,10 +750,9 @@ MonoBehaviour:
   characterAnimator: {fileID: 9542308}
   characterAttackParamName: attack
   weaponCollider: {fileID: 1385927943}
-  attackCooldown: 1.1
+  attackColliderEnableDelay: 0.1
+  attackCooldown: 1.5
   attackRange: 3.25
-  isAttackArea: 0
-  attackDelay: 0
   chasePlayerScript: {fileID: 1985068333}
 --- !u!1 &165938
 GameObject:

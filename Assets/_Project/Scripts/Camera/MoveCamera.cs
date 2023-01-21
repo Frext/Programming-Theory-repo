@@ -1,12 +1,12 @@
 using UnityEngine;
 
-namespace Camera
+namespace _Project.Scripts.Camera
 {
     public class MoveCamera : MonoBehaviour
     {
         [SerializeField] private Transform cameraPlaceholder;
     
-        void Update()
+        void LateUpdate()
         {
             transform.position = cameraPlaceholder.position;
         }

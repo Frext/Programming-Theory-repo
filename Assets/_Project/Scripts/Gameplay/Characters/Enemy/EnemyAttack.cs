@@ -1,5 +1,4 @@
 using _Project.Scripts.Gameplay.Characters.Common;
-using Attributes;
 using UnityEngine;
 
 namespace _Project.Scripts.Gameplay.Characters.Enemy
@@ -8,19 +7,13 @@ namespace _Project.Scripts.Gameplay.Characters.Enemy
     {
         [Range(0, 50)]
         [SerializeField] private float attackRange;
-        
-        public bool isAttackArea;
-        
-        [ConditionalHide(nameof(isAttackArea))]
-        public float attackDelay;
-        
-        
+
         [Header("Detect Player")]
         [Tooltip("This script is used for getting the layer mask of player.")]
         [SerializeField] private ChasePlayer chasePlayerScript;
         
         
-        float timePassed;
+        float elapsedTime;
 
         void Update()
         {
@@ -32,14 +25,14 @@ namespace _Project.Scripts.Gameplay.Characters.Enemy
 
         protected override void Attack()
         {
-            if (timePassed < Time.fixedTime)
+            if (elapsedTime < Time.fixedTime)
             {
                 PlayAttackAnimation();
 
-                Invoke(nameof(EnableAttacking), attackDelay);
-                Invoke(nameof(DisableAttacking), attackCooldown / 2);
+                StartCoroutine(IEnableAttacking(attackColliderEnableDelay));
+                StartCoroutine(IDisableAttacking((attackColliderEnableDelay + attackCooldown) / 2));
 
-                timePassed = attackCooldown + Time.fixedTime;
+                elapsedTime = attackColliderEnableDelay + attackCooldown + Time.fixedTime;
             }
         }
 

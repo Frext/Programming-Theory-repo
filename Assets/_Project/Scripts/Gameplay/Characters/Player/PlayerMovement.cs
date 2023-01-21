@@ -1,7 +1,5 @@
-using System;
 using System.Collections;
-using System.Globalization;
-using Camera;
+using _Project.Scripts.Camera;
 using UnityEngine;
 
 namespace _Project.Scripts.Gameplay.Characters.Player

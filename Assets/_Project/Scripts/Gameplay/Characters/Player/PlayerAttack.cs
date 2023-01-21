@@ -6,7 +6,7 @@ namespace _Project.Scripts.Gameplay.Characters.Player
     // INHERITANCE
     public class PlayerAttack : AttackManager
     {
-        float timePassed;
+        float elapsedTime;
 
         void Update()
         {
@@ -21,14 +21,14 @@ namespace _Project.Scripts.Gameplay.Characters.Player
         // POLYMORPHISM
         protected override void Attack()
         {
-            if (Input.GetButton("Fire1") && timePassed < Time.time)
+            if (Input.GetButton("Fire1") && elapsedTime < Time.time)
             {
                 PlayAttackAnimation();
 
-                EnableAttacking();
-                Invoke(nameof(DisableAttacking), attackCooldown / 2);
+                StartCoroutine(IEnableAttacking(attackColliderEnableDelay));
+                StartCoroutine(IDisableAttacking((attackColliderEnableDelay + attackCooldown) / 2));
                 
-                timePassed = attackCooldown + Time.time;
+                elapsedTime = attackColliderEnableDelay + attackCooldown + Time.time;
             }
         }
 

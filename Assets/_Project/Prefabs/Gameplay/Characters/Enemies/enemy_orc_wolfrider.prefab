@@ -1133,13 +1133,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b618dd21c8350034ca3849f4a6beb98a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 0}
+  _playerCollider: {fileID: 0}
   _playerLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  buildingLayerMask:
-    serializedVersion: 2
-    m_Bits: 1
   sightRange: 60
   rotateSpeed: 0.25
   agent: {fileID: 1210789480}
@@ -1161,10 +1158,9 @@ MonoBehaviour:
   characterAnimator: {fileID: 9575048}
   characterAttackParamName: attack
   weaponCollider: {fileID: 1080237886}
+  attackColliderEnableDelay: 0.25
   attackCooldown: 1.75
   attackRange: 6.7
-  isAttackArea: 1
-  attackDelay: 0.25
   chasePlayerScript: {fileID: 1210789481}
 --- !u!1 &153408
 GameObject:
