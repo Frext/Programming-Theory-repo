@@ -1109,11 +1109,11 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 1
-  m_Speed: 15
+  m_Speed: 20
   m_Acceleration: 15
   avoidancePriority: 50
   m_AngularSpeed: 140
-  m_StoppingDistance: 7
+  m_StoppingDistance: 7.05
   m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 1
   m_AutoRepath: 0
@@ -1137,9 +1137,13 @@ MonoBehaviour:
   _playerLayerMask:
     serializedVersion: 2
     m_Bits: 128
+  buildingLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
   sightRange: 60
   rotateSpeed: 0.25
   agent: {fileID: 1210789480}
+  playerChasingDurationAfterDisappearing: 3
   animator: {fileID: 9575048}
   attackStateName: attack
 --- !u!114 &1210789482
@@ -1154,12 +1158,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36521e04dbc1bbd4a830dfa10d8891b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponAnimator: {fileID: 9575048}
+  characterAnimator: {fileID: 9575048}
+  characterAttackParamName: attack
   weaponCollider: {fileID: 1080237886}
-  attackCooldown: 2
+  attackCooldown: 1.75
   attackRange: 6.7
   isAttackArea: 1
-  attackDelay: 0.35
+  attackDelay: 0.25
   chasePlayerScript: {fileID: 1210789481}
 --- !u!1 &153408
 GameObject:
@@ -2022,7 +2027,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   attackManager: {fileID: 1210789482}
-  attackerColliderBody: {fileID: 4049040981320776913}
+  healthManagerScript: {fileID: 8747796223688803464}
 --- !u!1 &4049040981320776913
 GameObject:
   m_ObjectHideFlags: 0
@@ -2063,7 +2068,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4049040981320776913}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 90a9ba80d302db2498fea3a0cf17e56a, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -2083,6 +2088,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialHealth: 10
   healthBar: {fileID: 4026350304713472049}
+  onTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
   onDie:
     m_PersistentCalls:
       m_Calls:

@@ -4,11 +4,11 @@ namespace Camera
 {
     public class MoveCamera : MonoBehaviour
     {
-        [SerializeField] private Transform cameraPlaceholderPosition;
+        [SerializeField] private Transform cameraPlaceholder;
     
         void Update()
         {
-            transform.position = cameraPlaceholderPosition.position;
+            transform.position = cameraPlaceholder.position;
         }
     }
 }

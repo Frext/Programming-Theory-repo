@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace UI
+namespace _Project.Scripts.UI
 {
     public class TitleMenu : MonoBehaviour
     {

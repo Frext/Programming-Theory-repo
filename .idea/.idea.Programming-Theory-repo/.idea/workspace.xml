@@ -35,9 +35,24 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.appearance&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\furka\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\furka\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\furka\\AppData\\Local\\Symbols\\src&quot;
+    ]
   }
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2021.3.9f1\Editor\Unity.exe" />
+      <option name="PROGRAM_PARAMETERS" value="-projectPath &quot;C:\Users\furka\Desktop\Programming\Unity\Unity-Projects\2 - Unity Learn\Programming-Theory-repo&quot; -debugCodeOptimization" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\furka\Desktop\Programming\Unity\Unity-Projects\2 - Unity Learn\Programming-Theory-repo" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
     <configuration name="UnitTests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2021.3.9f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath &quot;C:\Users\furka\Desktop\Programming\Unity\Unity-Projects\2 - Unity Learn\Programming-Theory-repo&quot; -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
@@ -124,6 +139,23 @@
       <workItem from="1671559891200" duration="1027000" />
       <workItem from="1673371736626" duration="1542000" />
       <workItem from="1673698218466" duration="26000" />
+      <workItem from="1673700158509" duration="654000" />
+      <workItem from="1673725997320" duration="3801000" />
+      <workItem from="1673730572772" duration="316000" />
+      <workItem from="1673811877088" duration="5011000" />
+      <workItem from="1673858850382" duration="5758000" />
+      <workItem from="1673878666299" duration="1774000" />
+      <workItem from="1673888122715" duration="4624000" />
+      <workItem from="1673899672463" duration="1531000" />
+      <workItem from="1673901374801" duration="1028000" />
+      <workItem from="1673986234615" duration="4312000" />
+      <workItem from="1674072042005" duration="4581000" />
+      <workItem from="1674108759344" duration="4512000" />
+      <workItem from="1674126841788" duration="2522000" />
+      <workItem from="1674134322986" duration="607000" />
+      <workItem from="1674246881687" duration="326000" />
+      <workItem from="1674247502778" duration="173000" />
+      <workItem from="1674283186756" duration="646000" />
     </task>
     <servers />
   </component>
