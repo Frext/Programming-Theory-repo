@@ -1972,6 +1972,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxMoveSpeed: 12
+  moveBackwardsMultiplier: 0.8
   cameraControllerScript: {fileID: 0}
   jumpForce: 8.75
   jumpCooldown: 0.875

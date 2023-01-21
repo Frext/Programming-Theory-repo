@@ -9,11 +9,22 @@ namespace _Project.Scripts.Gameplay.Characters.Player
     {
         [Header("Movement")]
         [Range(0, 30)]
-        [SerializeField] private float maxMoveSpeed;
+        [SerializeField] private float maxMoveSpeed = 12;
+        [Range(0, 1)]
+        [SerializeField] private float moveBackwardsMultiplier = 0.75f;
         [Tooltip("This script is needed to get the orientation object automatically.")]
         [SerializeField] private CameraController cameraControllerScript;
 
         Transform orientation;
+        
+        float horizontalInput;
+        float verticalInput;
+
+        Vector3 moveDirection;
+
+        bool isMovingBackwards;
+
+        Rigidbody playerRb;
 
         
         [Header("Jump")]
@@ -27,13 +38,6 @@ namespace _Project.Scripts.Gameplay.Characters.Player
         [SerializeField] private float airMultiplier;
 
         bool isReadyToJump;
-
-        float horizontalInput;
-        float verticalInput;
-
-        Vector3 moveDirection;
-
-        Rigidbody playerRb;
 
 
         [Header("Ground Check")]
@@ -53,9 +57,12 @@ namespace _Project.Scripts.Gameplay.Characters.Player
         
         const float ANIM_LERP_MULTIPLIER = 8.9f;
 
+        
         void Start()
         {
             orientation = cameraControllerScript.GetOrientationObject();
+
+            isMovingBackwards = false;
             
             isReadyToJump = true;
             
@@ -72,8 +79,6 @@ namespace _Project.Scripts.Gameplay.Characters.Player
 
             // If this is called in FixedUpdate, the speed limit can still be exceeded a little bit.
             ClampSpeed();
-
-            FallFaster();
         }
 
         private void HandleInput()
@@ -110,29 +115,22 @@ namespace _Project.Scripts.Gameplay.Characters.Player
 		private void ClampSpeed()
         {
             Vector3 flatVelocity = new Vector3(playerRb.velocity.x, 0f, playerRb.velocity.z);
-
-            // If the speed limit is exceeded
-            if (flatVelocity.magnitude > maxMoveSpeed)
+            
+            // If you are moving backwards, the speed limit is lower than usual.
+            if (isMovingBackwards && flatVelocity.magnitude >= maxMoveSpeed * moveBackwardsMultiplier)
+            {
+                Vector3 limitedVelocity = flatVelocity.normalized * (maxMoveSpeed * moveBackwardsMultiplier);
+                
+                playerRb.velocity = new Vector3(limitedVelocity.x, playerRb.velocity.y, limitedVelocity.z);
+            }
+            else if (flatVelocity.magnitude >= maxMoveSpeed)
             {
                 Vector3 limitedVelocity = flatVelocity.normalized * maxMoveSpeed;
                 
                 playerRb.velocity = new Vector3(limitedVelocity.x, playerRb.velocity.y, limitedVelocity.z);
             }
-            // If the player is going backwards, it should move a bit slower.
-            else if(verticalInput < -0.01f)
-            {
-                
-            }
-            
         }
 
-        private void FallFaster()
-        {
-            if (playerRb.velocity.y < -0.01f)
-            {
-                playerRb.velocity += Vector3.up * (Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime);
-            }
-        }
 
         void FixedUpdate()
         {
@@ -142,6 +140,9 @@ namespace _Project.Scripts.Gameplay.Characters.Player
 
             MovePlayer();
             
+            FallFaster();
+            
+
             RefreshAnimator();
         }
 
@@ -159,14 +160,25 @@ namespace _Project.Scripts.Gameplay.Characters.Player
         private void MovePlayer()
         {
             moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+            moveDirection.Normalize();
+            
+            isMovingBackwards = Vector3.Dot(orientation.forward, moveDirection) < -.5f;
 
             if (isPlayerGrounded)
             {
-                playerRb.AddForce(moveDirection.normalized * (maxMoveSpeed * 10f), ForceMode.Force);
+                playerRb.AddForce(moveDirection * (maxMoveSpeed * 10f));
             }
             else
             {
-                playerRb.AddForce(moveDirection.normalized * (maxMoveSpeed * 10f * airMultiplier), ForceMode.Force);
+                playerRb.AddForce(moveDirection * (maxMoveSpeed * 10f * airMultiplier));
+            }
+        }
+        
+        private void FallFaster()
+        {
+            if (playerRb.velocity.y < -0.01f)
+            {
+                playerRb.velocity += Vector3.up * (Physics.gravity.y * fallMultiplier * Time.fixedDeltaTime);
             }
         }
 
