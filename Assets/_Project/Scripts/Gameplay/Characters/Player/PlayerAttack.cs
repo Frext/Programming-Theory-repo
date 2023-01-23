@@ -26,9 +26,9 @@ namespace _Project.Scripts.Gameplay.Characters.Player
                 PlayAttackAnimation();
 
                 StartCoroutine(IEnableAttacking(attackColliderEnableDelay));
-                StartCoroutine(IDisableAttacking((attackColliderEnableDelay + attackCooldown) / 2));
+                StartCoroutine(IDisableAttacking(attackColliderEnableDelay + attackDuration));
                 
-                elapsedTime = attackColliderEnableDelay + attackCooldown + Time.time;
+                elapsedTime = attackCooldown + Time.time;
             }
         }
 

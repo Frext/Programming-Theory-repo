@@ -52,8 +52,9 @@ namespace _Project.Scripts.Gameplay.Characters.Player
         [Header("Animation")] 
         [SerializeField] private Animator playerAnimator;
         
-        private static readonly int MoveX = Animator.StringToHash("MoveX");
-        private static readonly int MoveZ = Animator.StringToHash("MoveZ");
+        private static readonly int AnimPara_MoveX = Animator.StringToHash("MoveX");
+        private static readonly int AnimPara_MoveZ = Animator.StringToHash("MoveZ");
+        private static readonly int AnimPara_IsGrounded = Animator.StringToHash("isGrounded");
         
         const float ANIM_LERP_MULTIPLIER = 8.9f;
 
@@ -150,6 +151,8 @@ namespace _Project.Scripts.Gameplay.Characters.Player
         {
             isPlayerGrounded = Physics.Raycast(transform.position, Vector3.down, 
                 jumpRangeFromGround + 0.15f, groundLayer) && playerRb.velocity.y is < 0.01f and > -0.01f;
+            
+            playerAnimator.SetBool(AnimPara_IsGrounded, isPlayerGrounded);
         }
 
         private void HandlePlayerDrag()
@@ -188,10 +191,10 @@ namespace _Project.Scripts.Gameplay.Characters.Player
             // The additions in the second lerp argument lets us have the velocity by direction,
             // therefore we can set the animation parameters accurately.
             
-            playerAnimator.SetFloat(MoveX, Mathf.Lerp(playerAnimator.GetFloat(MoveX) ,playerRb.velocity.x * orientation.right.x +
+            playerAnimator.SetFloat(AnimPara_MoveX, Mathf.Lerp(playerAnimator.GetFloat(AnimPara_MoveX) ,playerRb.velocity.x * orientation.right.x +
                 playerRb.velocity.z * orientation.right.z, ANIM_LERP_MULTIPLIER * Time.fixedDeltaTime));
             
-            playerAnimator.SetFloat(MoveZ, Mathf.Lerp(playerAnimator.GetFloat(MoveZ) ,playerRb.velocity.z * orientation.forward.z +
+            playerAnimator.SetFloat(AnimPara_MoveZ, Mathf.Lerp(playerAnimator.GetFloat(AnimPara_MoveZ) ,playerRb.velocity.z * orientation.forward.z +
                 playerRb.velocity.x * orientation.forward.x, ANIM_LERP_MULTIPLIER * Time.fixedDeltaTime));
         }
 

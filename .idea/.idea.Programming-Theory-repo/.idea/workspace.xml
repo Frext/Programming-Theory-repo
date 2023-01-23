@@ -12,6 +12,8 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/24d45e813e524a99bfb7a145158a7980157a00/78/a584b269/MonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Managers/EnemyWaveManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/UI/ShowIntObject.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Editor/UI/InputFieldEditor.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/VertexModifiers/Outline.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -159,7 +161,14 @@
       <workItem from="1674306190182" duration="963000" />
       <workItem from="1674308896931" duration="2985000" />
       <workItem from="1674312038220" duration="9000" />
-      <workItem from="1674326463601" duration="1451000" />
+      <workItem from="1674326463601" duration="1884000" />
+      <workItem from="1674396085825" duration="3849000" />
+      <workItem from="1674400017605" duration="1235000" />
+      <workItem from="1674418388459" duration="4018000" />
+      <workItem from="1674456027326" duration="5022000" />
+      <workItem from="1674467298549" duration="1223000" />
+      <workItem from="1674472082452" duration="4087000" />
+      <workItem from="1674492637793" duration="2580000" />
     </task>
     <servers />
   </component>

@@ -18,7 +18,6 @@ namespace _Project.Scripts.Gameplay.Characters.Common
 
         // ENCAPSULATION
         private int _health;
-
         private int Health
         {
             get => _health;
@@ -33,10 +32,19 @@ namespace _Project.Scripts.Gameplay.Characters.Common
 
         private void UpdateHealthBar()
         {
-            healthBar.fillAmount = (float)Health / initialHealth;
+            if (healthBar != null)
+            {
+                healthBar.fillAmount = (float)Health / initialHealth;
+            }
         }
 
-        void OnEnable()
+        void Start()
+        {
+            SetHealthToMax();
+        }
+        
+        // It's used when a pool object gets added to pool again. We need to set the health to the initial value again.
+        public void SetHealthToMax()
         {
             Health = initialHealth;
         }
@@ -50,15 +58,9 @@ namespace _Project.Scripts.Gameplay.Characters.Common
 
         private void InvokeEvents()
         {
-            if(!enabled)
-                return;
-            
             if (Health == 0)
             {
                 onDie.Invoke();
-
-                // Disable this script to avoid invoking the on die event more than once.
-                enabled = false;
             }
             else
             {

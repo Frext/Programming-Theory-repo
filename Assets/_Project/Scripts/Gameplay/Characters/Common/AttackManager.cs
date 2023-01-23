@@ -14,10 +14,13 @@ namespace _Project.Scripts.Gameplay.Characters.Common
         [Header("Attack Properties")]
         [Range(0, 10)]
         [SerializeField] protected float attackColliderEnableDelay;
+        [Tooltip("This value is added on top of " + nameof(attackColliderEnableDelay))]
         [Range(0, 10)]
+        [SerializeField] protected float attackDuration;
+        [Range(0, 20)]
         [SerializeField] protected float attackCooldown;
 
-        
+
         protected void Start()
         {
             // Disable the collider at the beginning to avoid attacking all the time.

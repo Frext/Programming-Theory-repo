@@ -1999,8 +1999,9 @@ MonoBehaviour:
   characterAnimator: {fileID: 7033455320432561726}
   characterAttackParamName: attack
   weaponCollider: {fileID: 8279187227318666576}
-  attackColliderEnableDelay: 0.1
-  attackCooldown: 1.1
+  attackColliderEnableDelay: 0.15
+  attackDuration: 0.5
+  attackCooldown: 1.2
 --- !u!1 &4126164719873952329
 GameObject:
   m_ObjectHideFlags: 0
@@ -2248,7 +2249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b263ce11d95768478711abcf710034c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialHealth: 20
+  initialHealth: 30
   healthBar: {fileID: 0}
   onTakeDamage:
     m_PersistentCalls:
@@ -2495,31 +2496,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3369347365250468388, guid: aebb60c5eab58a0499b60584a2aae08e, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.6978501
+      value: 0.7356837
       objectReference: {fileID: 0}
     - target: {fileID: 3369347365250468388, guid: aebb60c5eab58a0499b60584a2aae08e, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.6684773
+      value: 0.6524038
       objectReference: {fileID: 0}
     - target: {fileID: 3369347365250468388, guid: aebb60c5eab58a0499b60584a2aae08e, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.043840524
+      value: -0.16603412
       objectReference: {fileID: 0}
     - target: {fileID: 3369347365250468388, guid: aebb60c5eab58a0499b60584a2aae08e, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.25341973
+      value: 0.074643
       objectReference: {fileID: 0}
     - target: {fileID: 3369347365250468388, guid: aebb60c5eab58a0499b60584a2aae08e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -287.212
+      value: -280.031
       objectReference: {fileID: 0}
     - target: {fileID: 3369347365250468388, guid: aebb60c5eab58a0499b60584a2aae08e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 69.748
+      value: 302.505
       objectReference: {fileID: 0}
     - target: {fileID: 3369347365250468388, guid: aebb60c5eab58a0499b60584a2aae08e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 94.296
+      value: 322.178
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aebb60c5eab58a0499b60584a2aae08e, type: 3}

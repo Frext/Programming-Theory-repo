@@ -5,7 +5,8 @@ namespace _Project.Scripts.Gameplay.Characters.Enemy
 {
     public class EnemyAttack : AttackManager
     {
-        [Range(0, 50)]
+        [Space]
+        [Range(0, 10)]
         [SerializeField] private float attackRange;
 
         [Header("Detect Player")]
@@ -25,14 +26,14 @@ namespace _Project.Scripts.Gameplay.Characters.Enemy
 
         protected override void Attack()
         {
-            if (elapsedTime < Time.fixedTime)
+            if (elapsedTime < Time.time)
             {
                 PlayAttackAnimation();
 
                 StartCoroutine(IEnableAttacking(attackColliderEnableDelay));
-                StartCoroutine(IDisableAttacking((attackColliderEnableDelay + attackCooldown) / 2));
+                StartCoroutine(IDisableAttacking(attackColliderEnableDelay + attackDuration));
 
-                elapsedTime = attackColliderEnableDelay + attackCooldown + Time.fixedTime;
+                elapsedTime = attackCooldown + Time.time;
             }
         }
 
