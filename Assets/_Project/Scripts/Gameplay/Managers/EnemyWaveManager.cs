@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using _Project.Scripts.Gameplay.Data.Scriptable_Object_Templates;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace _Project.Scripts.Gameplay.Managers
@@ -27,7 +26,11 @@ namespace _Project.Scripts.Gameplay.Managers
 
         [SerializeField] private Vector3 spawnRange;
 
-        [Space] [SerializeField] private IntObject WaveCount;
+        [Space] 
+        [SerializeField] private IntObject WaveCount;
+
+        [Range(0.01f, 5)]
+        [SerializeField] private float checkFrequency;
 
         List<GameObject> lastSpawnedWaveList = new();
 
@@ -41,7 +44,7 @@ namespace _Project.Scripts.Gameplay.Managers
         {
             WaveCount.value = 0;
             
-            InvokeRepeating(nameof(GenerateWaveWhenDead), 1f, 1f);
+            InvokeRepeating(nameof(GenerateWaveWhenDead), 2f, checkFrequency);
         }
 
         private void GenerateWaveWhenDead()
@@ -51,6 +54,17 @@ namespace _Project.Scripts.Gameplay.Managers
                 GenerateNewWave();
                 SetRandomPositions();
             }
+        }
+        
+        private bool IsCurrentWaveDead()
+        {
+            foreach (GameObject currentEnemy in lastSpawnedWaveList)
+            {
+                if (currentEnemy.activeInHierarchy)
+                    return false;
+            }
+
+            return true;
         }
 
         private void GenerateNewWave()
@@ -73,18 +87,7 @@ namespace _Project.Scripts.Gameplay.Managers
                 }
             }
         }
-
-        private bool IsCurrentWaveDead()
-        {
-            foreach (GameObject currentEnemy in lastSpawnedWaveList)
-            {
-                if (currentEnemy.activeInHierarchy)
-                    return false;
-            }
-
-            return true;
-        }
-
+        
         private void SetRandomPositions()
         {
             foreach (GameObject currentEnemy in lastSpawnedWaveList)
@@ -97,6 +100,11 @@ namespace _Project.Scripts.Gameplay.Managers
 
                 currentEnemy.transform.position = currentPos;
             }
+        }
+
+        public void StopSpawningWaves()
+        {
+            CancelInvoke();
         }
     }
 }
