@@ -6,19 +6,19 @@ using Random = UnityEngine.Random;
 
 namespace _Project.Scripts.Gameplay.Managers
 {
-    [Serializable]
-    public class ObjectPoolClass
-    {
-        public GameObjectPool gameObjectPool;
-        [Range(0, 10)] public int initialWaveSize;
-
-        [Space] 
-        [Range(0, 10)] public int waveSizeIncreaseCount;
-        [Range(0, 10)] public int increaseWaveSizeAfterWaves;
-    }
-
     public class EnemyWaveManager : MonoBehaviour
     {
+        [Serializable]
+        private class ObjectPoolClass
+        {
+            public GameObjectPool gameObjectPool;
+            [Range(0, 10)] public int initialWaveSize;
+
+            [Space]
+            [Range(0, 10)] public int waveSizeIncreaseCount;
+            [Range(0, 10)] public int increaseWaveSizeAfterWaves;
+        }
+        
         [Header("Wave Properties")]
         [Space]
         [SerializeField]

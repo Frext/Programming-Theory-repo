@@ -2000,7 +2000,7 @@ MonoBehaviour:
   characterAttackParamName: attack
   weaponCollider: {fileID: 8279187227318666576}
   attackColliderEnableDelay: 0.15
-  attackDuration: 0.5
+  attackDuration: 0.4
   attackCooldown: 1.2
 --- !u!1 &4126164719873952329
 GameObject:

@@ -1066,6 +1066,9 @@ MonoBehaviour:
   IntObject: {fileID: 11400000, guid: 41c3298dc759c15418d340ed42015d90, type: 2}
   precedingText: 'WAVE '
   shouldUpdate: 1
+  showingConditions:
+  - condition: 0
+    value: 0
 --- !u!1001 &207539815
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3497,7 +3500,7 @@ MonoBehaviour:
     increaseWaveSizeAfterWaves: 2
   spawnRange: {x: 65, y: 0, z: 50}
   WaveCount: {fileID: 11400000, guid: 41c3298dc759c15418d340ed42015d90, type: 2}
-  checkFrequency: 2
+  checkFrequency: 1
 --- !u!1001 &600783534
 PrefabInstance:
   m_ObjectHideFlags: 0
