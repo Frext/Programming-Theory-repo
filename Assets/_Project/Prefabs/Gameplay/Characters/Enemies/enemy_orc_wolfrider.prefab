@@ -1137,7 +1137,7 @@ MonoBehaviour:
   _playerLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  sightRange: 85
+  sightRange: 100
   rotateSpeed: 0.25
   agent: {fileID: 1210789480}
   playerChasingDurationAfterDisappearing: 3
