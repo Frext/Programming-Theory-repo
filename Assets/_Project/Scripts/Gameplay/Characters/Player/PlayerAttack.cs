@@ -34,6 +34,9 @@ namespace _Project.Scripts.Gameplay.Characters.Player
 
         protected override void PlayAttackAnimation()
         {
+            if(characterAnimator.GetCurrentAnimatorStateInfo(0).IsName(characterAttackParamName))
+                return;
+            
             characterAnimator.SetTrigger(characterAttackParamName);
         }
     }

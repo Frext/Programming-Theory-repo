@@ -3,10 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using _Project.Scripts.Gameplay.Data.Scriptable_Object_Templates;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
-namespace _Project.Scripts.Gameplay.Managers
+namespace _Project.Scripts.Gameplay.Managers.Waving
 {
     public class WaveManager : MonoBehaviour
     {
@@ -20,6 +19,7 @@ namespace _Project.Scripts.Gameplay.Managers
             [Space]
             [Range(0, 10)] public int waveSizeIncreaseCount;
             [Range(0, 10)] public int increaseWaveSizeAfterWaves;
+            public bool canSurviveMultipleWaves;
             [Space]
             public Vector3 spawnRange;
         }
@@ -67,9 +67,9 @@ namespace _Project.Scripts.Gameplay.Managers
         
         private bool IsCurrentWaveDead()
         {
-            foreach (GameObject currentEnemy in lastSpawnedWaveDictionary.Keys)
+            foreach (KeyValuePair<GameObject, WaveClass> dictionary in lastSpawnedWaveDictionary)
             {
-                if (currentEnemy.activeInHierarchy)
+                if (!dictionary.Value.canSurviveMultipleWaves && dictionary.Key.activeInHierarchy)
                     return false;
             }
 
