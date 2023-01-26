@@ -3739,7 +3739,7 @@ MonoBehaviour:
     waveSizeIncreaseCount: 1
     increaseWaveSizeAfterWaves: 3
     canSurviveMultipleWaves: 1
-    spawnRange: {x: 50, y: 0, z: 75}
+    spawnRange: {x: 50, y: 2, z: 75}
   WaveCountSO: {fileID: 11400000, guid: 41c3298dc759c15418d340ed42015d90, type: 2}
   waveInterval: 2
 --- !u!1001 &600783534
@@ -5526,46 +5526,6 @@ PrefabInstance:
     - target: {fileID: 3596748220834623885, guid: 917e00053cb499241a1d42e2b2716532, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 8279187227318280148, guid: 917e00053cb499241a1d42e2b2716532, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.394
-      objectReference: {fileID: 0}
-    - target: {fileID: 8279187227318280148, guid: 917e00053cb499241a1d42e2b2716532, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.063
-      objectReference: {fileID: 0}
-    - target: {fileID: 8279187227318280148, guid: 917e00053cb499241a1d42e2b2716532, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.077
-      objectReference: {fileID: 0}
-    - target: {fileID: 8279187227318280148, guid: 917e00053cb499241a1d42e2b2716532, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.68961334
-      objectReference: {fileID: 0}
-    - target: {fileID: 8279187227318280148, guid: 917e00053cb499241a1d42e2b2716532, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.66462874
-      objectReference: {fileID: 0}
-    - target: {fileID: 8279187227318280148, guid: 917e00053cb499241a1d42e2b2716532, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.27707344
-      objectReference: {fileID: 0}
-    - target: {fileID: 8279187227318280148, guid: 917e00053cb499241a1d42e2b2716532, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.07702311
-      objectReference: {fileID: 0}
-    - target: {fileID: 8279187227318280148, guid: 917e00053cb499241a1d42e2b2716532, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -286.392
-      objectReference: {fileID: 0}
-    - target: {fileID: 8279187227318280148, guid: 917e00053cb499241a1d42e2b2716532, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 262.466
-      objectReference: {fileID: 0}
-    - target: {fileID: 8279187227318280148, guid: 917e00053cb499241a1d42e2b2716532, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 291.772
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 917e00053cb499241a1d42e2b2716532, type: 3}
