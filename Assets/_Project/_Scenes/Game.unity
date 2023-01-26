@@ -3622,18 +3622,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57469220ba4975544b8e220944b06452, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectPoolClasses:
+  enemyWaveClasses:
   - gameObjectPool: {fileID: 1534235409}
     initialWaveSize: 1
     waveSizeIncreaseCount: 1
     increaseWaveSizeAfterWaves: 1
-  - gameObjectPool: {fileID: 0}
+  - gameObjectPool: {fileID: 1534235410}
     initialWaveSize: 0
     waveSizeIncreaseCount: 1
     increaseWaveSizeAfterWaves: 2
   spawnRange: {x: 65, y: 0, z: 50}
-  WaveCount: {fileID: 11400000, guid: 41c3298dc759c15418d340ed42015d90, type: 2}
-  checkFrequency: 1
+  WaveCountSO: {fileID: 11400000, guid: 41c3298dc759c15418d340ed42015d90, type: 2}
+  waveInterval: 2
 --- !u!1001 &600783534
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7407,8 +7407,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 963194227}
     - target: {fileID: 8747796223688803464, guid: 80afb8f52d27bae4f8ff4cf083945861, type: 3}
-      propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8747796223688803464, guid: 80afb8f52d27bae4f8ff4cf083945861, type: 3}
+      propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
+      objectReference: {fileID: 1210789478}
+    - target: {fileID: 8747796223688803464, guid: 80afb8f52d27bae4f8ff4cf083945861, type: 3}
+      propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80afb8f52d27bae4f8ff4cf083945861, type: 3}
@@ -8840,7 +8848,7 @@ GameObject:
   - component: {fileID: 1534235409}
   - component: {fileID: 1534235410}
   m_Layer: 0
-  m_Name: Pool Object
+  m_Name: Object Pools
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8874,7 +8882,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolObjectPrefab: {fileID: 1985068325}
-  initialPoolSize: 5
+  initialPoolSize: 10
   parentTransform: {fileID: 1080997977}
 --- !u!114 &1534235410
 MonoBehaviour:
@@ -10953,6 +10961,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: scene_enemy_skeleton
       objectReference: {fileID: 0}
+    - target: {fileID: 165424, guid: 9f4313a771e05c64d8da7ae6bd19a19f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 403496, guid: 9f4313a771e05c64d8da7ae6bd19a19f, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -11002,9 +11014,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1707344283}
     - target: {fileID: 1750502542435886636, guid: 9f4313a771e05c64d8da7ae6bd19a19f, type: 3}
-      propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1750502542435886636, guid: 9f4313a771e05c64d8da7ae6bd19a19f, type: 3}
+      propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 1534235409}
+      objectReference: {fileID: 1985068325}
+    - target: {fileID: 1750502542435886636, guid: 9f4313a771e05c64d8da7ae6bd19a19f, type: 3}
+      propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4026350306448265285, guid: 9f4313a771e05c64d8da7ae6bd19a19f, type: 3}
       propertyPath: m_Camera
       value: 

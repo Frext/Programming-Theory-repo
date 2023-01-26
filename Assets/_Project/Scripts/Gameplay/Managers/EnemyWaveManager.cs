@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using _Project.Scripts.Gameplay.Data.Scriptable_Object_Templates;
 using UnityEngine;
@@ -9,50 +10,57 @@ namespace _Project.Scripts.Gameplay.Managers
     public class EnemyWaveManager : MonoBehaviour
     {
         [Serializable]
-        private class ObjectPoolClass
+        private class EnemyWaveClass
         {
             public GameObjectPool gameObjectPool;
+            
+            [Header("Wave Properties")]
             [Range(0, 10)] public int initialWaveSize;
-
             [Space]
             [Range(0, 10)] public int waveSizeIncreaseCount;
             [Range(0, 10)] public int increaseWaveSizeAfterWaves;
         }
         
         [Header("Wave Properties")]
-        [Space]
-        [SerializeField]
-        List<ObjectPoolClass> objectPoolClasses;
-
+        [SerializeField] List<EnemyWaveClass> enemyWaveClasses;
         [SerializeField] private Vector3 spawnRange;
+        
+        [Space]
+        [SerializeField] private IntObject WaveCountSO;
+        [Range(1, 10)] [SerializeField] private float waveInterval = 2f;
 
-        [Space] 
-        [SerializeField] private IntObject WaveCount;
-
-        [Range(0.01f, 5)]
-        [SerializeField] private float checkFrequency;
-
+        
         List<GameObject> lastSpawnedWaveList = new();
 
         void Awake()
         {
-            if (objectPoolClasses.Count == 0)
+            if (enemyWaveClasses.Count == 0)
                 enabled = false;
         }
 
         void Start()
         {
-            WaveCount.value = 0;
-            
-            InvokeRepeating(nameof(GenerateWaveWhenDead), 2f, checkFrequency);
+            WaveCountSO.value = 0;
+
+            StartCoroutine(IGenerateWaveWhenDead());
         }
 
-        private void GenerateWaveWhenDead()
+        private IEnumerator IGenerateWaveWhenDead()
         {
-            if (IsCurrentWaveDead())
+            while (true)
             {
-                GenerateNewWave();
-                SetRandomPositions();
+                if (IsCurrentWaveDead())
+                {
+                    yield return new WaitForSeconds(waveInterval);
+                    
+                    GenerateNewWave();
+
+                    SetRandomPositions();
+                }
+                else
+                {
+                    yield return new WaitForSeconds(1f);
+                }
             }
         }
         
@@ -69,16 +77,16 @@ namespace _Project.Scripts.Gameplay.Managers
 
         private void GenerateNewWave()
         {
-            WaveCount.value++;
+            WaveCountSO.value++;
             
             lastSpawnedWaveList.Clear();
 
-            foreach (ObjectPoolClass currentPoolClass in objectPoolClasses)
+            foreach (EnemyWaveClass currentPoolClass in enemyWaveClasses)
             {
                 // We subtract 1 from the WaveCount to equalize the right side of the sum to 0
                 // for the initial wave size at the 1st wave.
                 int waveSize = currentPoolClass.initialWaveSize + currentPoolClass.waveSizeIncreaseCount *
-                    ((WaveCount.value - 1) / currentPoolClass.increaseWaveSizeAfterWaves);
+                    ((WaveCountSO.value - 1) / currentPoolClass.increaseWaveSizeAfterWaves);
                 
                 // We do this check not to get an exception from the game object pool.
                 if (waveSize > 0)
@@ -86,6 +94,8 @@ namespace _Project.Scripts.Gameplay.Managers
                     lastSpawnedWaveList.AddRange(currentPoolClass.gameObjectPool.GetFromQueue(waveSize));
                 }
             }
+            
+            
         }
         
         private void SetRandomPositions()

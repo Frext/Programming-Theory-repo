@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using _Project.Scripts.Gameplay.Characters.Common;
 using UnityEngine;
 
 namespace _Project.Scripts.Gameplay.Managers
@@ -25,9 +26,17 @@ namespace _Project.Scripts.Gameplay.Managers
 			for (int i = 0; i < objectCount; i++)
 			{
 				GameObject newPoolObject = Instantiate(poolObjectPrefab, parentTransform);
-				
+
+				AssignNewPoolObjectProperties(newPoolObject);
+
 				AddToQueue(newPoolObject);
 			}
+		}
+
+		private void AssignNewPoolObjectProperties(GameObject newPoolObject)
+		{
+			// Assign this script for the enemy to return to the pool when dead.
+			newPoolObject.GetComponentInChildren<HealthManager>().ownerPoolScript = this;
 		}
 
 		public void AddToQueue(GameObject poolObject)

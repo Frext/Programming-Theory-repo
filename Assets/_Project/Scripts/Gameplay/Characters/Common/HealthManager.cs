@@ -1,3 +1,5 @@
+using System;
+using _Project.Scripts.Gameplay.Managers;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -15,6 +17,8 @@ namespace _Project.Scripts.Gameplay.Characters.Common
         [Space] 
         [SerializeField] private UnityEvent onTakeDamage;
         [SerializeField] private UnityEvent onDie;
+
+        [HideInInspector] public GameObjectPool ownerPoolScript;
 
         // ENCAPSULATION
         private int _health;
@@ -40,11 +44,11 @@ namespace _Project.Scripts.Gameplay.Characters.Common
 
         void Start()
         {
-            SetHealthToMax();
+            SetHealthToInitial();
         }
         
-        // It's used when a pool object gets added to pool again. We need to set the health to the initial value again.
-        public void SetHealthToMax()
+        // This is also used when an enemy returns to the pool, so it must be public.
+        public void SetHealthToInitial()
         {
             Health = initialHealth;
         }
@@ -68,6 +72,8 @@ namespace _Project.Scripts.Gameplay.Characters.Common
             }
         }
 
+        #region Player Methods
+        
         public void ColliderDie(GameObject colliderParent)
         {
             // Disable the colliders for the enemies not to raycast dead player presence.
@@ -76,5 +82,17 @@ namespace _Project.Scripts.Gameplay.Characters.Common
                 childCollider.enabled = false;
             }
         }
+        #endregion
+
+        #region Enemy Methods
+        
+        public void ReturnToOwnerPool(GameObject parentGameObject)
+        {
+            if (ownerPoolScript != null)
+                ownerPoolScript.AddToQueue(parentGameObject);
+            else
+                throw new Exception("Can't add an object without an owner pool to queue.");
+        }
+        #endregion
     }
 }
