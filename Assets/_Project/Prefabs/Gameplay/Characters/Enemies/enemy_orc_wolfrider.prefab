@@ -1037,6 +1037,7 @@ GameObject:
   - component: {fileID: 1210789480}
   - component: {fileID: 1210789481}
   - component: {fileID: 1210789482}
+  - component: {fileID: 1210789484}
   m_Layer: 8
   m_Name: enemy_orc_wolfrider
   m_TagString: Untagged
@@ -1163,6 +1164,19 @@ MonoBehaviour:
   attackCooldown: 1.75
   attackRange: 6.7
   chasePlayerScript: {fileID: 1210789481}
+--- !u!114 &1210789484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57fa60a21047c084b89fd3e7e47db03b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerPoolScript: {fileID: 0}
 --- !u!1 &153408
 GameObject:
   m_ObjectHideFlags: 0
@@ -2083,7 +2097,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b263ce11d95768478711abcf710034c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialHealth: 10
+  maxHealth: 10
   healthBar: {fileID: 4026350304713472049}
   onTakeDamage:
     m_PersistentCalls:
@@ -2091,14 +2105,14 @@ MonoBehaviour:
   onDie:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8747796223688803464}
-        m_TargetAssemblyTypeName: _Project.Scripts.Gameplay.Characters.Common.HealthManager,
+      - m_Target: {fileID: 1210789484}
+        m_TargetAssemblyTypeName: _Project.Scripts.Gameplay.Managers.GameObjectPoolElement,
           Assembly-CSharp
         m_MethodName: ReturnToOwnerPool
-        m_Mode: 1
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 153010}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2117,7 +2131,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  ownerPoolScript: {fileID: 0}
 --- !u!1001 &1016077183
 PrefabInstance:
   m_ObjectHideFlags: 0

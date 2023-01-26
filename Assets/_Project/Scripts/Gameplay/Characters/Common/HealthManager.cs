@@ -1,5 +1,3 @@
-using System;
-using _Project.Scripts.Gameplay.Managers;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -11,15 +9,14 @@ namespace _Project.Scripts.Gameplay.Characters.Common
     [RequireComponent(typeof(Collider))]
     public class HealthManager : MonoBehaviour
     {
-        [SerializeField] private int initialHealth;
+        [SerializeField] private int maxHealth;
         [SerializeField] private Image healthBar;
 
         [Space] 
         [SerializeField] private UnityEvent onTakeDamage;
         [SerializeField] private UnityEvent onDie;
 
-        [HideInInspector] public GameObjectPool ownerPoolScript;
-
+        
         // ENCAPSULATION
         private int _health;
         private int Health
@@ -38,7 +35,7 @@ namespace _Project.Scripts.Gameplay.Characters.Common
         {
             if (healthBar != null)
             {
-                healthBar.fillAmount = (float)Health / initialHealth;
+                healthBar.fillAmount = (float)Health / maxHealth;
             }
         }
 
@@ -50,7 +47,7 @@ namespace _Project.Scripts.Gameplay.Characters.Common
         // This is also used when an enemy returns to the pool, so it must be public.
         public void SetHealthToInitial()
         {
-            Health = initialHealth;
+            Health = maxHealth;
         }
 
         public void TakeDamage(int damageAmount)
@@ -83,15 +80,19 @@ namespace _Project.Scripts.Gameplay.Characters.Common
             }
         }
         #endregion
-
-        #region Enemy Methods
         
-        public void ReturnToOwnerPool(GameObject parentGameObject)
+        #region Pickup Methods
+        
+        public bool AddHealth(int amount)
         {
-            if (ownerPoolScript != null)
-                ownerPoolScript.AddToQueue(parentGameObject);
-            else
-                throw new Exception("Can't add an object without an owner pool to queue.");
+            if (amount > 0 && Health < maxHealth)
+            {
+                Health += amount;
+
+                return true;
+            }
+
+            return false;
         }
         #endregion
     }

@@ -12,7 +12,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/24d45e813e524a99bfb7a145158a7980157a00/78/a584b269/MonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Managers/EnemyWaveManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Pickups/HealthPickup.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/UI/SceneLoader.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/UI/ShowIntObject.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Editor/UI/InputFieldEditor.cs" root0="SKIP_HIGHLIGHTING" />
@@ -176,7 +176,8 @@
       <workItem from="1674637649162" duration="1622000" />
       <workItem from="1674640584347" duration="298000" />
       <workItem from="1674724804297" duration="1756000" />
-      <workItem from="1674733178436" duration="2145000" />
+      <workItem from="1674733178436" duration="6465000" />
+      <workItem from="1674740108394" duration="335000" />
     </task>
     <servers />
   </component>
