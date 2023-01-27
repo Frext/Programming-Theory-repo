@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 515d2f6245eea474480e1a8b7897fe16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healAmount: 5
+  healAmount: 10
   healLayers:
     serializedVersion: 2
     m_Bits: 128

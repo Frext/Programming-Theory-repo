@@ -132,7 +132,6 @@ namespace _Project.Scripts.Gameplay.Characters.Player
             }
         }
 
-
         void FixedUpdate()
         {
             UpdatePlayerGroundState();
@@ -151,8 +150,6 @@ namespace _Project.Scripts.Gameplay.Characters.Player
         {
             isPlayerGrounded = Physics.Raycast(transform.position, Vector3.down, 
                 jumpRangeFromGround + 0.15f, groundLayer) && playerRb.velocity.y is < 0.01f and > -0.01f;
-            
-            playerAnimator.SetBool(AnimPara_IsGrounded, isPlayerGrounded);
         }
 
         private void HandlePlayerDrag()
@@ -187,6 +184,8 @@ namespace _Project.Scripts.Gameplay.Characters.Player
 
         private void RefreshAnimator()
         {
+            playerAnimator.SetBool(AnimPara_IsGrounded, isPlayerGrounded);
+            
             // The velocity lerp lets us have a smoother transition between the animation states.
             // The additions in the second lerp argument lets us have the velocity by direction,
             // therefore we can set the animation parameters accurately.

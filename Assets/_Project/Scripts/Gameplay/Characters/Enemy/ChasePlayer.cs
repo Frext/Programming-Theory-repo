@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 namespace _Project.Scripts.Gameplay.Characters.Enemy
 {
@@ -8,13 +9,20 @@ namespace _Project.Scripts.Gameplay.Characters.Enemy
     {
         [Header("Detect Player")] 
         [SerializeField] private Collider _playerCollider;
+        
         Transform playerTransform;
 
         [SerializeField] private LayerMask _playerLayerMask;
         public LayerMask PlayerLayerMask => _playerLayerMask;
-
-        [Space]
+ 
+        
+        [FormerlySerializedAs("length")]
+        [Header("Enemy Properties")] 
+        [Tooltip("The " + nameof(height) + " is used when raycasting towards the enemy.")]
+        [SerializeField] private float height = 5f;
+        
         [SerializeField] private float sightRange = 30f;
+        
         [Tooltip("The speed of rotating the enemy towards the player")]
         [SerializeField] private float rotateSpeed = 0.25f;
         
@@ -23,7 +31,7 @@ namespace _Project.Scripts.Gameplay.Characters.Enemy
         [SerializeField] private NavMeshAgent agent;
         [SerializeField] private float playerChasingDurationAfterDisappearing;
 
-        float elapsedTime = -1f;
+        float elapsedTime;
         
         
         [Header("Animation")]
@@ -33,6 +41,7 @@ namespace _Project.Scripts.Gameplay.Characters.Enemy
 
         static readonly int Speed = Animator.StringToHash("speed");
 
+        
         void Start()
         {
             playerTransform = _playerCollider.gameObject.transform;
@@ -72,8 +81,8 @@ namespace _Project.Scripts.Gameplay.Characters.Enemy
         private bool IsPlayerInSightRange()
         {
             RaycastHit raycastHit;
-            
-            if (Physics.Raycast(transform.position + Vector3.up * 1, (playerTransform.position - transform.position).normalized, out raycastHit, sightRange))
+
+            if (Physics.Raycast(transform.position + Vector3.up * height, (playerTransform.position - transform.position).normalized, out raycastHit, sightRange))
             {
                 LayerMask layerHit = raycastHit.transform.gameObject.layer;
 

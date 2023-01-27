@@ -105,17 +105,27 @@ namespace _Project.Scripts.Gameplay.Managers.Waving
             foreach (KeyValuePair<GameObject, WaveClass> dictionary in lastSpawnedWaveDictionary)
             {
                 GameObject currentEnemy = dictionary.Key;
+                WaveClass currentWaveClass = dictionary.Value;
                 
-                Vector3 currentPos = currentEnemy.transform.position;
-                Vector3 waveManagerPos = transform.position;
-
-                Vector3 spawnRange = dictionary.Value.spawnRange;
-
-                currentPos.x = Random.Range(waveManagerPos.x - spawnRange.x, waveManagerPos.x + spawnRange.x);
-                currentPos.z = Random.Range(waveManagerPos.z - spawnRange.z, waveManagerPos.z + spawnRange.z);
-
-                currentEnemy.transform.position = currentPos;
+                currentEnemy.transform.position = GetRandomPositionOutsideColliders(transform.position, currentWaveClass.spawnRange);
             }
+        }
+
+        private Vector3 GetRandomPositionOutsideColliders(Vector3 basePosition, Vector3 spawnRange)
+        {
+            Vector3 randomPos = Vector3.zero;
+
+            do
+            {
+                randomPos.x = Random.Range(basePosition.x - spawnRange.x, basePosition.x + spawnRange.x);
+                randomPos.y = Random.Range(basePosition.y, basePosition.y + spawnRange.y);
+                randomPos.z = Random.Range(basePosition.z - spawnRange.z, basePosition.z + spawnRange.z);
+                    
+                // If the object is spawned inside a collider, get a random position again.
+                // The Vector3.up multiplier mustn't be greater than the radius. It can cause the editor to freeze.
+            } while(Physics.CheckSphere(randomPos + Vector3.up * 3, 2f));
+
+            return randomPos;
         }
 
         public void StopSpawningWaves()
