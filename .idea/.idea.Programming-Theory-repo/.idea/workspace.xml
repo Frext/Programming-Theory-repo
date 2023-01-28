@@ -15,6 +15,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Pickups/HealthPickup.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/UI/SceneLoader.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/UI/ShowIntObject.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.cinemachine@2.8.9/Runtime/Behaviours/CinemachineVirtualCamera.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Editor/UI/InputFieldEditor.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/VertexModifiers/Outline.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -181,6 +182,12 @@
       <workItem from="1674751355145" duration="1977000" />
       <workItem from="1674813150650" duration="1288000" />
       <workItem from="1674822012731" duration="1309000" />
+      <workItem from="1674826913328" duration="2727000" />
+      <workItem from="1674847110519" duration="1398000" />
+      <workItem from="1674851157016" duration="981000" />
+      <workItem from="1674891538386" duration="663000" />
+      <workItem from="1674911308409" duration="789000" />
+      <workItem from="1674940163153" duration="602000" />
     </task>
     <servers />
   </component>
