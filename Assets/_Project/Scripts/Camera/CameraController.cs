@@ -11,7 +11,16 @@ namespace _Project.Scripts.Camera
         [Header("Camera Properties")]
         [SerializeField] private float mouseSensitivity;
 
-        [SerializeField] private List<GameObject> virtualCameraList;
+        [Serializable]
+        private class CameraClass
+        {
+            public GameObject cameraObject;
+            
+            [Space]
+            public bool rotateX;
+        }
+        
+        [SerializeField] private List<CameraClass> cameraClassList;
         
         int _currentCameraTransformIndex;
         int CurrentCameraTransformIndex
@@ -20,13 +29,13 @@ namespace _Project.Scripts.Camera
             set
             {
                 // Rewind the index value to 0 if the set value equals to the count of the camera transforms.
-                if (value == virtualCameraList.Count)
+                if (value == cameraClassList.Count)
                 {
                     _currentCameraTransformIndex = 0;
                 }
                 else
                 {
-                    _currentCameraTransformIndex = Mathf.Clamp(value, 0, virtualCameraList.Count - 1);
+                    _currentCameraTransformIndex = Mathf.Clamp(value, 0, cameraClassList.Count - 1);
                 }
 
                 UpdateCameraActiveStates();
@@ -35,10 +44,10 @@ namespace _Project.Scripts.Camera
 
         private void UpdateCameraActiveStates()
         {
-            for (int index = 0; index < virtualCameraList.Count; index++)
+            for (int index = 0; index < cameraClassList.Count; index++)
             {
                 // If the current index is found, turn the camera object on.
-                virtualCameraList[index].SetActive(index == CurrentCameraTransformIndex);
+                cameraClassList[index].cameraObject.SetActive(index == CurrentCameraTransformIndex);
             }
         }
 
@@ -88,11 +97,22 @@ namespace _Project.Scripts.Camera
 
             xRotation -= mouseY;
             xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+            
+            
+            HandleCurrentCameraRotationPreferences();
 
-            virtualCameraList[CurrentCameraTransformIndex].transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+            cameraClassList[CurrentCameraTransformIndex].cameraObject.transform.rotation = 
+                Quaternion.Euler(xRotation, yRotation, 0);
+           
             orientation.rotation = Quaternion.Euler(0, yRotation, 0);
         }
-        
+
+        private void HandleCurrentCameraRotationPreferences()
+        {
+            if (!cameraClassList[CurrentCameraTransformIndex].rotateX)
+                xRotation = 0;
+        }
+
         private void HandleCameraSwitch()
         {
             if (Input.GetKeyDown(KeyCode.V))

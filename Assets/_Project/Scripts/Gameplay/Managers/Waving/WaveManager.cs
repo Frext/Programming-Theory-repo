@@ -31,6 +31,11 @@ namespace _Project.Scripts.Gameplay.Managers.Waving
         [Range(1, 10)] [SerializeField] private float waveInterval = 2f;
         
         
+        [Space]
+        [Tooltip("A wave object is spawned in a random position, these layers lets us make sure they don't spawn in buildings or so.")]
+        [SerializeField] private LayerMask collidableLayers;
+        
+        
         Dictionary<GameObject, WaveClass> lastSpawnedWaveDictionary = new();
 
         void Awake()
@@ -123,7 +128,7 @@ namespace _Project.Scripts.Gameplay.Managers.Waving
                     
                 // If the object is spawned inside a collider, get a random position again.
                 // The Vector3.up multiplier mustn't be greater than the radius. It can cause the editor to freeze.
-            } while(Physics.CheckSphere(randomPos + Vector3.up * 3, 2f));
+            } while(Physics.CheckSphere(randomPos + Vector3.up * 3, 2f, collidableLayers));
 
             return randomPos;
         }
