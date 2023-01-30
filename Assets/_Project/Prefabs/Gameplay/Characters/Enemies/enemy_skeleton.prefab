@@ -1119,8 +1119,11 @@ MonoBehaviour:
   attackLayers:
     serializedVersion: 2
     m_Bits: 128
+  OnMeleeCollision:
+    m_PersistentCalls:
+      m_Calls: []
   attackManager: {fileID: 1985068328}
-  healthManagerScript: {fileID: 1750502542435886636}
+  _healthManagerScript: {fileID: 1750502542435886636}
 --- !u!1 &5094438004392994175
 GameObject:
   m_ObjectHideFlags: 0
