@@ -1,6 +1,8 @@
 using System.Collections;
 using _Project.Scripts.Camera;
+using _Project.Scripts.Gameplay.SFX;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace _Project.Scripts.Gameplay.Characters.Player
 {
@@ -8,12 +10,14 @@ namespace _Project.Scripts.Gameplay.Characters.Player
     public class PlayerMovement : MonoBehaviour
     {
         [Header("Movement")]
-        [Range(0, 30)]
-        [SerializeField] private float maxMoveSpeed = 12;
-        [Range(0, 1)]
-        [SerializeField] private float moveBackwardsMultiplier = 0.75f;
+        [Range(0, 30)] [SerializeField] private float maxMoveSpeed = 12;
+        [Range(0, 1)] [SerializeField] private float moveBackwardsMultiplier = 0.75f;
+        
         [Tooltip("This script is needed to get the orientation object automatically.")]
         [SerializeField] private CameraController cameraControllerScript;
+        
+        [Space]
+        [SerializeField] private SFXElement movementSFXElement;
 
         Transform orientation;
         
@@ -136,12 +140,16 @@ namespace _Project.Scripts.Gameplay.Characters.Player
         {
             UpdatePlayerGroundState();
                 
-            HandlePlayerDrag();
+            UpdatePlayerDrag();
 
             MovePlayer();
             
+            UpdateMoveBackwardsState();
+            
             FallFaster();
             
+            
+            PlayMovementSFX();
 
             RefreshAnimator();
         }
@@ -152,7 +160,7 @@ namespace _Project.Scripts.Gameplay.Characters.Player
                 jumpRangeFromGround + 0.15f, groundLayer) && playerRb.velocity.y is < 0.01f and > -0.01f;
         }
 
-        private void HandlePlayerDrag()
+        private void UpdatePlayerDrag()
         {
             playerRb.drag = isPlayerGrounded ? groundDrag : 0f;
         }
@@ -161,8 +169,6 @@ namespace _Project.Scripts.Gameplay.Characters.Player
         {
             moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
             moveDirection.Normalize();
-            
-            isMovingBackwards = Vector3.Dot(orientation.forward, moveDirection) < -.5f;
 
             if (isPlayerGrounded)
             {
@@ -173,12 +179,29 @@ namespace _Project.Scripts.Gameplay.Characters.Player
                 playerRb.AddForce(moveDirection * (maxMoveSpeed * 10f * airMultiplier));
             }
         }
-        
+
+        private void UpdateMoveBackwardsState()
+        {
+            isMovingBackwards = Vector3.Dot(orientation.forward, moveDirection) < -.5f;
+        }
+
         private void FallFaster()
         {
             if (playerRb.velocity.y < -0.01f)
             {
                 playerRb.velocity += Vector3.up * (Physics.gravity.y * fallMultiplier * Time.fixedDeltaTime);
+            }
+        }
+
+        private void PlayMovementSFX()
+        {
+            if (playerRb.velocity.magnitude > 0.5f)
+            {
+                movementSFXElement.PlayRepeatedly();
+            }
+            else
+            {
+                movementSFXElement.StopPlayingRepeatedly();
             }
         }
 

@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 9090630262107930881}
   - component: {fileID: 8630674762232677102}
   - component: {fileID: 3261585399519066648}
-  - component: {fileID: 532284636}
   - component: {fileID: 532284637}
+  - component: {fileID: 9104861025176045335}
+  - component: {fileID: 532284636}
   m_Layer: 0
   m_Name: pickup_first_aid_kit
   m_TagString: Untagged
@@ -120,19 +121,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.069273, y: 2.5032947, z: 0.4886825}
   m_Center: {x: 0, y: 1.2310425, z: 0.20749219}
---- !u!114 &532284636
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7355713013926475229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57fa60a21047c084b89fd3e7e47db03b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ownerPoolScript: {fileID: 0}
 --- !u!114 &532284637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,3 +153,42 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 9104861025176045335}
+        m_TargetAssemblyTypeName: _Project.Scripts.Gameplay.SFX.SFXElement, Assembly-CSharp
+        m_MethodName: PlayOneShotSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &9104861025176045335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7355713013926475229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d08039f84afba64408821533d36ae622, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxHandler: {fileID: 0}
+  audioClipType: 2
+--- !u!114 &532284636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7355713013926475229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57fa60a21047c084b89fd3e7e47db03b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerPoolScript: {fileID: 0}

@@ -629,6 +629,7 @@ GameObject:
   - component: {fileID: 5795848692299018179}
   - component: {fileID: 1985068333}
   - component: {fileID: 1985068328}
+  - component: {fileID: 4845435559273851756}
   - component: {fileID: 1926302438419923883}
   m_Layer: 8
   m_Name: enemy_skeleton
@@ -757,6 +758,20 @@ MonoBehaviour:
   attackCooldown: 1.5
   attackRange: 3.25
   chasePlayerScript: {fileID: 1985068333}
+--- !u!114 &4845435559273851756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d08039f84afba64408821533d36ae622, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxHandler: {fileID: 0}
+  audioClipType: 1
 --- !u!114 &1926302438419923883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1119,9 +1134,8 @@ MonoBehaviour:
   attackLayers:
     serializedVersion: 2
     m_Bits: 128
-  OnMeleeCollision:
-    m_PersistentCalls:
-      m_Calls: []
+  bloodParticleEffect: {fileID: 0}
+  attackSFXElement: {fileID: 4845435559273851756}
   attackManager: {fileID: 1985068328}
   _healthManagerScript: {fileID: 1750502542435886636}
 --- !u!1 &5094438004392994175

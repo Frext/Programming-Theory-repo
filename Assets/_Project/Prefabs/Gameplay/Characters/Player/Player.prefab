@@ -1898,7 +1898,9 @@ GameObject:
   - component: {fileID: 7033455320432561726}
   - component: {fileID: 932608285}
   - component: {fileID: 616289169130688771}
+  - component: {fileID: 7768904143128260679}
   - component: {fileID: 4743381157291049013}
+  - component: {fileID: 5197259300809770678}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -1978,12 +1980,27 @@ MonoBehaviour:
   jumpCooldown: 0.875
   fallMultiplier: 2.3
   airMultiplier: 0.2
+  movementSFXElement: {fileID: 7768904143128260679}
   jumpRangeFromGround: 0.45
   groundDrag: 8
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
   playerAnimator: {fileID: 7033455320432561726}
+--- !u!114 &7768904143128260679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3596748220834623885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d08039f84afba64408821533d36ae622, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxHandler: {fileID: 0}
+  audioClipType: 0
 --- !u!114 &4743381157291049013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2002,6 +2019,20 @@ MonoBehaviour:
   attackColliderEnableDelay: 0.1
   attackDuration: 0.3
   attackCooldown: 1
+--- !u!114 &5197259300809770678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3596748220834623885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d08039f84afba64408821533d36ae622, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxHandler: {fileID: 0}
+  audioClipType: 1
 --- !u!1 &4126164719873952329
 GameObject:
   m_ObjectHideFlags: 0
@@ -2515,6 +2546,10 @@ PrefabInstance:
       propertyPath: attackManager
       value: 
       objectReference: {fileID: 4743381157291049013}
+    - target: {fileID: 3369347365250076835, guid: aebb60c5eab58a0499b60584a2aae08e, type: 3}
+      propertyPath: attackSFXElement
+      value: 
+      objectReference: {fileID: 5197259300809770678}
     - target: {fileID: 3369347365250076835, guid: aebb60c5eab58a0499b60584a2aae08e, type: 3}
       propertyPath: healthManagerScript
       value: 
