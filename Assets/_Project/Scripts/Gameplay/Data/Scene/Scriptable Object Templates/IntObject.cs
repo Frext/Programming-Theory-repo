@@ -1,11 +1,14 @@
-using System;
 using UnityEngine;
 
-namespace _Project.Scripts.Gameplay.Data.Scriptable_Object_Templates
+namespace _Project.Scripts.Gameplay.Data.Scene.Scriptable_Object_Templates
 {
-	[CreateAssetMenu(fileName = nameof(IntObject), menuName = "Scriptable Objects/" + nameof(IntObject), order = 0)]
+	[CreateAssetMenu(fileName = nameof(IntObject), menuName = "Scriptable Objects/" + nameof(IntObject))]
 	public class IntObject : ScriptableObject
 	{
-		public int value;
+		public int initialValue;
+		
+		public int runtimeValue;
+
+		private void OnEnable() => runtimeValue = initialValue;
 	}
 }

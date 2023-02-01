@@ -7,19 +7,19 @@ namespace _Project.Scripts.Gameplay.Characters.Common
     // A collider is required for the object the health manager is in,
     // because the swords get the health manager reference from the collided object. 
     [RequireComponent(typeof(Collider))]
-    public class HealthManager : MonoBehaviour
+    public abstract class HealthManager : MonoBehaviour
     {
-        [SerializeField] private int maxHealth;
-        [SerializeField] private Image healthBar;
+        [SerializeField] protected int maxHealth;
+        [SerializeField] protected Image healthBar;
 
-        [Space] 
-        [SerializeField] private UnityEvent onTakeDamage;
-        [SerializeField] private UnityEvent onDie;
+        [Space]
+        [SerializeField] protected UnityEvent onTakeDamage;
+        [SerializeField] protected UnityEvent onDie;
 
         
         // ENCAPSULATION
         private int _health;
-        private int Health
+        protected int Health
         {
             get => _health;
             set
@@ -28,7 +28,6 @@ namespace _Project.Scripts.Gameplay.Characters.Common
 
                 UpdateHealthBar();
             }
-            
         }
 
         private void UpdateHealthBar()
@@ -38,17 +37,19 @@ namespace _Project.Scripts.Gameplay.Characters.Common
                 healthBar.fillAmount = (float)Health / maxHealth;
             }
         }
+        
 
-        void Start()
+        protected virtual void Start()
         {
             SetHealthToInitial();
         }
-        
-        // This is also used when an enemy returns to the pool, so it must be public.
-        public void SetHealthToInitial()
+
+        private void SetHealthToInitial()
         {
             Health = maxHealth;
         }
+
+        #region Methods Used By Other Scripts
 
         public void TakeDamage(int damageAmount)
         {
@@ -69,31 +70,6 @@ namespace _Project.Scripts.Gameplay.Characters.Common
             }
         }
 
-        #region Player Methods
-        
-        public void ColliderDie(GameObject colliderParent)
-        {
-            // Disable the colliders for the enemies not to raycast dead player presence.
-            foreach (Collider childCollider in colliderParent.GetComponents<Collider>())
-            {
-                childCollider.enabled = false;
-            }
-        }
-        #endregion
-        
-        #region Pickup Methods
-        
-        public bool AddHealth(int amount)
-        {
-            if (amount > 0 && Health < maxHealth)
-            {
-                Health += amount;
-
-                return true;
-            }
-
-            return false;
-        }
         #endregion
     }
 }

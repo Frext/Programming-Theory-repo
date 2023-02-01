@@ -1,18 +1,18 @@
 using System;
-using _Project.Scripts.Gameplay.Characters.Common;
+using _Project.Scripts.Gameplay.Characters.Player;
 using UnityEditor;
 using UnityEngine;
 
-namespace _Project.Scripts.Editor.UI
+namespace _Project.Scripts.Editor.Characters
 {
-    [CustomEditor(typeof(HealthManager))]
-    public class HealthManagerDrawer : UnityEditor.Editor
+    [CustomEditor(typeof(PlayerHealth))]
+    public class PlayerHealthDrawer : UnityEditor.Editor
     {
         public override void OnInspectorGUI()
         {
             DrawDefaultInspector();
 
-            HealthManager myScript = (HealthManager)target;
+            PlayerHealth myScript = (PlayerHealth)target;
             
             if(GUILayout.Button("Kill Me"))
             {

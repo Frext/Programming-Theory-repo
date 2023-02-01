@@ -2,7 +2,7 @@ using _Project.Scripts.UI;
 using UnityEditor;
 using UnityEngine;
 
-namespace _Project.Scripts.Editor
+namespace _Project.Scripts.Editor.UI
 {
     [CustomPropertyDrawer(typeof(ShowIntObject.IntShowCondition))]
     public class IntShowConditionDrawer : PropertyDrawer

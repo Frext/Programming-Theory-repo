@@ -6,22 +6,28 @@ namespace _Project.Scripts.Gameplay.Characters.Enemy
     public class EnemyAttack : AttackManager
     {
         [Space]
-        [Range(0, 10)]
-        [SerializeField] private float attackRange;
+        [Range(0, 10)] [SerializeField] private float attackRange;
 
         [Header("Detect Player")]
+        
         [Tooltip("This script is used for getting the layer mask of player.")]
         [SerializeField] private ChasePlayer chasePlayerScript;
         
-        
+
         float elapsedTime;
 
+        
         void Update()
         {
             if (IsPlayerInAttackRange())
             {
                 Attack();
             }
+        }
+        
+        private bool IsPlayerInAttackRange()
+        {
+            return Physics.CheckSphere(transform.position, attackRange, chasePlayerScript.GetPlayerLayerMask());
         }
 
         protected override void Attack()
@@ -35,16 +41,6 @@ namespace _Project.Scripts.Gameplay.Characters.Enemy
 
                 elapsedTime = attackCooldown + Time.time;
             }
-        }
-
-        protected override void PlayAttackAnimation()
-        {
-            characterAnimator.SetTrigger(characterAttackParamName);
-        }
-        
-        private bool IsPlayerInAttackRange()
-        {
-            return Physics.CheckSphere(transform.position, attackRange, chasePlayerScript.PlayerLayerMask);
         }
     }
 }

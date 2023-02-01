@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 8630674762232677102}
   - component: {fileID: 3261585399519066648}
   - component: {fileID: 532284637}
-  - component: {fileID: 9104861025176045335}
   - component: {fileID: 532284636}
+  - component: {fileID: 9104861025176045335}
   m_Layer: 0
   m_Name: pickup_first_aid_kit
   m_TagString: Untagged
@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healAmount: 10
-  healLayers:
+  healableLayers:
     serializedVersion: 2
     m_Bits: 128
   onPickup:
@@ -165,6 +165,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &532284636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7355713013926475229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57fa60a21047c084b89fd3e7e47db03b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerPoolScript: {fileID: 0}
 --- !u!114 &9104861025176045335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,16 +192,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sfxHandler: {fileID: 0}
   audioClipType: 2
---- !u!114 &532284636
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7355713013926475229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57fa60a21047c084b89fd3e7e47db03b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ownerPoolScript: {fileID: 0}

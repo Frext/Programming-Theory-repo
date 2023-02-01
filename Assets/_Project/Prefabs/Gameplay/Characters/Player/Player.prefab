@@ -1976,17 +1976,20 @@ MonoBehaviour:
   maxMoveSpeed: 12
   moveBackwardsMultiplier: 0.8
   cameraControllerScript: {fileID: 0}
+  movementSFXElement: {fileID: 7768904143128260679}
   jumpForce: 8.75
   jumpCooldown: 0.875
   fallMultiplier: 2.3
   airMultiplier: 0.2
-  movementSFXElement: {fileID: 7768904143128260679}
   jumpRangeFromGround: 0.45
   groundDrag: 8
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
   playerAnimator: {fileID: 7033455320432561726}
+  animXVelocityFloatParam: MoveX
+  animZVelocityFloatParam: MoveZ
+  animIsGroundedBoolParam: isGrounded
 --- !u!114 &7768904143128260679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2014,7 +2017,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterAnimator: {fileID: 7033455320432561726}
-  characterAttackParamName: attack
+  animAttackTriggerParam: attack
   weaponCollider: {fileID: 8279187227318666576}
   attackColliderEnableDelay: 0.1
   attackDuration: 0.3
@@ -2111,7 +2114,7 @@ GameObject:
   - component: {fileID: 1946929530578207690}
   - component: {fileID: 1418135573}
   - component: {fileID: 1418135574}
-  - component: {fileID: 1418135575}
+  - component: {fileID: 1707344284}
   m_Layer: 7
   m_Name: DummyMesh
   m_TagString: Untagged
@@ -2268,7 +2271,7 @@ CapsuleCollider:
   m_Height: 1.0159628
   m_Direction: 1
   m_Center: {x: 0, y: 0.9319161, z: 0.1}
---- !u!114 &1418135575
+--- !u!114 &1707344284
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2277,7 +2280,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7625710152922714309}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b263ce11d95768478711abcf710034c, type: 3}
+  m_Script: {fileID: 11500000, guid: 282d87b1fcddafc4db7556895f128879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 30
@@ -2312,8 +2315,8 @@ MonoBehaviour:
           m_StringArgument: death
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1418135575}
-        m_TargetAssemblyTypeName: _Project.Scripts.Gameplay.Characters.Common.HealthManager,
+      - m_Target: {fileID: 1707344284}
+        m_TargetAssemblyTypeName: _Project.Scripts.Gameplay.Characters.Player.PlayerHealth,
           Assembly-CSharp
         m_MethodName: ColliderDie
         m_Mode: 2
@@ -2363,7 +2366,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: _Project.Scripts.Gameplay.Managers.EnemyWaveManager,
+        m_TargetAssemblyTypeName: _Project.Scripts.Gameplay.Managers.Waving.WaveManager,
           Assembly-CSharp
         m_MethodName: StopSpawningWaves
         m_Mode: 1
@@ -2376,6 +2379,18 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: _Project.Scripts.Camera.CameraController, Assembly-CSharp
+        m_MethodName: UnlockCursor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -2399,18 +2414,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: _Project.Scripts.Camera.CameraController, Assembly-CSharp
-        m_MethodName: UnlockCursor
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+  playerHealthSO: {fileID: 11400000, guid: c6213c5d41358fb4da4262a3651ebe7f, type: 2}
 --- !u!1 &7898239453381700760
 GameObject:
   m_ObjectHideFlags: 0
@@ -2551,13 +2555,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5197259300809770678}
     - target: {fileID: 3369347365250076835, guid: aebb60c5eab58a0499b60584a2aae08e, type: 3}
+      propertyPath: _attackerCollider
+      value: 
+      objectReference: {fileID: 1418135573}
+    - target: {fileID: 3369347365250076835, guid: aebb60c5eab58a0499b60584a2aae08e, type: 3}
       propertyPath: healthManagerScript
       value: 
-      objectReference: {fileID: 1418135575}
+      objectReference: {fileID: 0}
     - target: {fileID: 3369347365250076835, guid: aebb60c5eab58a0499b60584a2aae08e, type: 3}
       propertyPath: _healthManagerScript
       value: 
-      objectReference: {fileID: 1418135575}
+      objectReference: {fileID: 1707344284}
     - target: {fileID: 3369347365250076835, guid: aebb60c5eab58a0499b60584a2aae08e, type: 3}
       propertyPath: particleEffects.Array.size
       value: 1
@@ -2567,12 +2575,68 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3369347365250076835, guid: aebb60c5eab58a0499b60584a2aae08e, type: 3}
+      propertyPath: onSuccessfulAttack.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3369347365250076835, guid: aebb60c5eab58a0499b60584a2aae08e, type: 3}
       propertyPath: OnMeleeCollision.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3369347365250076835, guid: aebb60c5eab58a0499b60584a2aae08e, type: 3}
+      propertyPath: onSuccessfulAttack.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3369347365250076835, guid: aebb60c5eab58a0499b60584a2aae08e, type: 3}
+      propertyPath: onSuccessfulAttack.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3369347365250076835, guid: aebb60c5eab58a0499b60584a2aae08e, type: 3}
+      propertyPath: onSuccessfulAttack.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8279187227318666579}
+    - target: {fileID: 3369347365250076835, guid: aebb60c5eab58a0499b60584a2aae08e, type: 3}
+      propertyPath: onSuccessfulAttack.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 5197259300809770678}
+    - target: {fileID: 3369347365250076835, guid: aebb60c5eab58a0499b60584a2aae08e, type: 3}
       propertyPath: OnMeleeCollision.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3369347365250076835, guid: aebb60c5eab58a0499b60584a2aae08e, type: 3}
+      propertyPath: onSuccessfulAttack.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3369347365250076835, guid: aebb60c5eab58a0499b60584a2aae08e, type: 3}
+      propertyPath: onSuccessfulAttack.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3369347365250076835, guid: aebb60c5eab58a0499b60584a2aae08e, type: 3}
+      propertyPath: onSuccessfulAttack.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayBloodParticleEffectAtCollisionPoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 3369347365250076835, guid: aebb60c5eab58a0499b60584a2aae08e, type: 3}
+      propertyPath: onSuccessfulAttack.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: PlayOneShotSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 3369347365250076835, guid: aebb60c5eab58a0499b60584a2aae08e, type: 3}
+      propertyPath: onSuccessfulAttack.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: _Project.Scripts.Gameplay.Tools.MeleeAttackHandler, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3369347365250076835, guid: aebb60c5eab58a0499b60584a2aae08e, type: 3}
+      propertyPath: onSuccessfulAttack.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: _Project.Scripts.Gameplay.SFX.SFXElement, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3369347365250076835, guid: aebb60c5eab58a0499b60584a2aae08e, type: 3}
+      propertyPath: onSuccessfulAttack.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3369347365250076835, guid: aebb60c5eab58a0499b60584a2aae08e, type: 3}
+      propertyPath: onSuccessfulAttack.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.ParticleSystem, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3369347365250076835, guid: aebb60c5eab58a0499b60584a2aae08e, type: 3}
+      propertyPath: onSuccessfulAttack.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3369347365250468388, guid: aebb60c5eab58a0499b60584a2aae08e, type: 3}
       propertyPath: m_RootOrder
@@ -2642,3 +2706,14 @@ BoxCollider:
   m_CorrespondingSourceObject: {fileID: 3369347365250076832, guid: aebb60c5eab58a0499b60584a2aae08e, type: 3}
   m_PrefabInstance: {fileID: 6640495496742229488}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8279187227318666579 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3369347365250076835, guid: aebb60c5eab58a0499b60584a2aae08e, type: 3}
+  m_PrefabInstance: {fileID: 6640495496742229488}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fa4d1b2455add64d8c61aae128ef6fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

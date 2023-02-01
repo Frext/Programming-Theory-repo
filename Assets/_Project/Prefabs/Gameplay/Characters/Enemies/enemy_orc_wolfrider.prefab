@@ -1037,8 +1037,8 @@ GameObject:
   - component: {fileID: 1210789480}
   - component: {fileID: 1210789481}
   - component: {fileID: 1210789482}
-  - component: {fileID: 1241541519767918680}
   - component: {fileID: 1210789484}
+  - component: {fileID: 1241541519767918680}
   m_Layer: 8
   m_Name: enemy_orc_wolfrider
   m_TagString: Untagged
@@ -1112,10 +1112,10 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 1
   m_Speed: 20
-  m_Acceleration: 15
+  m_Acceleration: 12
   avoidancePriority: 98
   m_AngularSpeed: 140
-  m_StoppingDistance: 7.05
+  m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 1
   m_AutoRepath: 0
@@ -1136,13 +1136,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerCollider: {fileID: 0}
-  _playerLayerMask:
+  playerLayerMask:
     serializedVersion: 2
     m_Bits: 128
   height: 5
   sightRange: 100
   rotateSpeed: 0.25
-  agent: {fileID: 1210789480}
+  navMeshAgent: {fileID: 1210789480}
   playerChasingDurationAfterDisappearing: 3
   animator: {fileID: 9575048}
   attackStateName: attack
@@ -1159,13 +1159,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterAnimator: {fileID: 9575048}
-  characterAttackParamName: attack
+  attackTriggerParam: attack
   weaponCollider: {fileID: 1080237886}
   attackColliderEnableDelay: 0.3
   attackDuration: 0.4
-  attackCooldown: 1.75
+  attackCooldown: 1.3
   attackRange: 6.7
   chasePlayerScript: {fileID: 1210789481}
+--- !u!114 &1210789484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57fa60a21047c084b89fd3e7e47db03b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerPoolScript: {fileID: 0}
 --- !u!114 &1241541519767918680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1180,19 +1193,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sfxHandler: {fileID: 0}
   audioClipType: 1
---- !u!114 &1210789484
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 153010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57fa60a21047c084b89fd3e7e47db03b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ownerPoolScript: {fileID: 0}
 --- !u!1 &153408
 GameObject:
   m_ObjectHideFlags: 0
@@ -2053,10 +2053,23 @@ MonoBehaviour:
   attackLayers:
     serializedVersion: 2
     m_Bits: 128
-  bloodParticleEffect: {fileID: 0}
-  attackSFXElement: {fileID: 1241541519767918680}
   attackManager: {fileID: 1210789482}
-  _healthManagerScript: {fileID: 8747796223688803464}
+  _attackerCollider: {fileID: 5125324659473549982}
+  onSuccessfulAttack:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1241541519767918680}
+        m_TargetAssemblyTypeName: _Project.Scripts.Gameplay.SFX.SFXElement, Assembly-CSharp
+        m_MethodName: PlayOneShotSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4049040981320776913
 GameObject:
   m_ObjectHideFlags: 0
@@ -2067,7 +2080,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5740406644891441074}
   - component: {fileID: 5125324659473549982}
-  - component: {fileID: 8747796223688803464}
+  - component: {fileID: 7479896508529613536}
   m_Layer: 8
   m_Name: Collider
   m_TagString: Untagged
@@ -2103,7 +2116,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0452974, y: 1.9987692, z: 2.5685241}
   m_Center: {x: 0.023557842, y: 0.9959771, z: -0.07118547}
---- !u!114 &8747796223688803464
+--- !u!114 &7479896508529613536
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2112,7 +2125,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4049040981320776913}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b263ce11d95768478711abcf710034c, type: 3}
+  m_Script: {fileID: 11500000, guid: 5d88bfea86a40314a8c10c68cffaebb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
@@ -2136,10 +2149,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8747796223688803464}
-        m_TargetAssemblyTypeName: _Project.Scripts.Gameplay.Characters.Common.HealthManager,
+      - m_Target: {fileID: 7479896508529613536}
+        m_TargetAssemblyTypeName: _Project.Scripts.Gameplay.Characters.Enemy.EnemyHealth,
           Assembly-CSharp
-        m_MethodName: SetHealthToInitial
+        m_MethodName: ResetHealth
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -12,23 +12,22 @@ namespace _Project.Scripts.Gameplay.Characters.Enemy
         
         Transform playerTransform;
 
-        [SerializeField] private LayerMask _playerLayerMask;
-        public LayerMask PlayerLayerMask => _playerLayerMask;
- 
-        
-        [FormerlySerializedAs("length")]
+        [SerializeField] private LayerMask playerLayerMask;
+
+
         [Header("Enemy Properties")] 
+        
         [Tooltip("The " + nameof(height) + " is used when raycasting towards the enemy.")]
         [SerializeField] private float height = 5f;
         
         [SerializeField] private float sightRange = 30f;
         
         [Tooltip("The speed of rotating the enemy towards the player")]
-        [SerializeField] private float rotateSpeed = 0.25f;
+        [SerializeField] private float rotateSpeed = 0.4f;
         
         
         [Header("Navigation")]
-        [SerializeField] private NavMeshAgent agent;
+        [SerializeField] private NavMeshAgent navMeshAgent;
         [SerializeField] private float playerChasingDurationAfterDisappearing;
 
         float elapsedTime;
@@ -36,11 +35,12 @@ namespace _Project.Scripts.Gameplay.Characters.Enemy
         
         [Header("Animation")]
         [SerializeField] private Animator animator;
-        [Tooltip("This is the name of the attack state in the animator. It's used to restrict movement while attacking.")]
-        [SerializeField] private string attackStateName = "attack";
 
-        static readonly int Speed = Animator.StringToHash("speed");
-
+        [Tooltip("This is used to restrict movement while attacking.")]
+        [SerializeField] private string animAttackStateName = "attack";
+        
+        [SerializeField] private string animSpeedFloatParam = "speed";
+        
         
         void Start()
         {
@@ -49,18 +49,18 @@ namespace _Project.Scripts.Gameplay.Characters.Enemy
 
         void Update()
         {
-            HandleWalkAnimation();
+            UpdateMovementAnimation();
             
             // ABSTRACTION
-            HandleStates();
+            HandleFollowStates();
         }
         
-        private void HandleWalkAnimation()
+        private void UpdateMovementAnimation()
         {
-            animator.SetFloat(Speed, agent.velocity.magnitude);
+            animator.SetFloat(animSpeedFloatParam, navMeshAgent.velocity.magnitude);
         }
 
-        private void HandleStates()
+        private void HandleFollowStates()
         {
             if (IsPlayerInSightRange())
             {
@@ -72,7 +72,7 @@ namespace _Project.Scripts.Gameplay.Characters.Enemy
             if (elapsedTime > Time.time)
             {
                 // If the enemy is currently attacking, don't move the enemy. If not, move the enemy
-                agent.SetDestination(animator.GetCurrentAnimatorStateInfo(0).IsName(attackStateName)
+                navMeshAgent.SetDestination(animator.GetCurrentAnimatorStateInfo(0).IsName(animAttackStateName)
                     ? transform.position
                     : playerTransform.position);
             }
@@ -80,26 +80,18 @@ namespace _Project.Scripts.Gameplay.Characters.Enemy
 
         private bool IsPlayerInSightRange()
         {
-            RaycastHit raycastHit;
-
-            if (Physics.Raycast(transform.position + Vector3.up * height, (playerTransform.position - transform.position).normalized, out raycastHit, sightRange))
+            if (Physics.Raycast(transform.position + Vector3.up * height, 
+                    (playerTransform.position - transform.position).normalized, out var raycastHit, sightRange))
             {
-                LayerMask layerHit = raycastHit.transform.gameObject.layer;
-
-                // I compare the layer and not the game object because the collider can be in a separate game object rather than the player transform.
-                if (IsInLayer(PlayerLayerMask,layerHit))
+                // I compare the layer that is hit and not the game object because
+                // the collider can be in a separate game object rather than the player transform.
+                if (HelperMethodsUtil.IsLayerInLayerMask(raycastHit.transform.gameObject.layer, playerLayerMask))
                     return true;
             }
 
             return false;
         }
-        
-        private bool IsInLayer(LayerMask layerMask,int layer)
-        {
-            // Returns true if the layer that is converted into a layer mask and the attack layer mask have a common bit which is 1.
-            return (layerMask & (1 << layer)) != 0;
-        }
-        
+
         private void LookAtPlayer()
         {
             // I didn't use player transform straightaway because we need a look rotation just on the y-axis.
@@ -107,5 +99,14 @@ namespace _Project.Scripts.Gameplay.Characters.Enemy
 
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(targetRotation), rotateSpeed);
         }
+
+        #region Methods Used By Other Scripts
+
+        public LayerMask GetPlayerLayerMask()
+        {
+            return playerLayerMask;
+        }
+
+        #endregion
     }
 }

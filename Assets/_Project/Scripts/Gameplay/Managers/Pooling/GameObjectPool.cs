@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
-using _Project.Scripts.Gameplay.Characters.Common;
 using UnityEngine;
 
-namespace _Project.Scripts.Gameplay.Managers
+namespace _Project.Scripts.Gameplay.Managers.Pooling
 {
 	public class GameObjectPool : MonoBehaviour
 	{
@@ -12,9 +11,11 @@ namespace _Project.Scripts.Gameplay.Managers
 		[SerializeField] private int initialPoolSize;
 
 		readonly Queue<GameObject> availablePoolObjects = new();
+		
 
 		[Header("Transform Properties")] 
 		[SerializeField] private Transform parentTransform;
+		
 		
 		void Awake()
 		{
@@ -27,23 +28,27 @@ namespace _Project.Scripts.Gameplay.Managers
 			{
 				GameObject newPoolObject = Instantiate(poolObjectPrefab, parentTransform);
 
-				AssignNewPoolObjectProperties(newPoolObject);
+				DisableObject(newPoolObject);
+				
+				AssignOwnerPoolToChildren(newPoolObject);
 
 				AddToQueue(newPoolObject);
 			}
 		}
 
-		private void AssignNewPoolObjectProperties(GameObject newPoolObject)
+		private void AssignOwnerPoolToChildren(GameObject newPoolObject)
 		{
 			// Assign this script for the pool element to return to the pool.
 			newPoolObject.GetComponentInChildren<GameObjectPoolElement>().ownerPoolScript = this;
 		}
 
-		public void AddToQueue(GameObject poolObject)
+		#region Methods Used By Other Scripts
+
+		public void AddToQueue(GameObject returnedPoolObject)
 		{
-			DisableObject(poolObject);
+			DisableObject(returnedPoolObject);
 			
-			availablePoolObjects.Enqueue(poolObject);
+			availablePoolObjects.Enqueue(returnedPoolObject);
 		}
 
 		private void DisableObject(GameObject poolObject)
@@ -51,21 +56,21 @@ namespace _Project.Scripts.Gameplay.Managers
 			poolObject.SetActive(false);
 		}
 
-		public List<GameObject> GetFromQueue(int count)
+		public List<GameObject> GetFromQueue(int objectCountToGet)
 		{
-			if (count <= 0)
+			if (objectCountToGet <= 0)
 				throw new Exception("Cannot get 0 or negative number objects from the pool");
 
-			// Create new objects if there arent enough in the pool.
-			if (availablePoolObjects.Count < count)
+			// Create new objects if there aren't enough in the pool.
+			if (availablePoolObjects.Count < objectCountToGet)
 			{
-				GrowPoolBy(count - availablePoolObjects.Count);
+				GrowPoolBy(objectCountToGet - availablePoolObjects.Count);
 			}
 			
 
 			List<GameObject> chosenPoolObjectsList = new();
 			
-			for (int i = 0; i < count; i++)
+			for (int i = 0; i < objectCountToGet; i++)
 			{
 				GameObject chosenPoolObject = availablePoolObjects.Dequeue();
 
@@ -81,5 +86,7 @@ namespace _Project.Scripts.Gameplay.Managers
 		{
 			poolObject.SetActive(true);
 		}
+
+		#endregion
 	}
 }

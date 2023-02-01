@@ -1,6 +1,7 @@
+using System;
 using UnityEngine;
 
-namespace _Project.Scripts.Gameplay.SFX
+namespace _Project.Scripts.Gameplay.Managers.SFX
 {
 	public class SFXElement : MonoBehaviour
 	{
@@ -8,8 +9,16 @@ namespace _Project.Scripts.Gameplay.SFX
 
 		[Space] 
 		[SerializeField] private SFXHandler.AudioClipTypes audioClipType;
-		
-		
+
+		void Start()
+		{
+			if (sfxHandler == null)
+				throw new Exception("There was no " + nameof(sfxHandler) + " assigned in the "
+				                    + nameof(SFXElement) + " script of " + gameObject.name);
+		}
+
+		#region Methods Used By Other Scripts
+
 		public void PlayOneShotSound()
 		{
 			sfxHandler.PlayOneShotSound(audioClipType, this);
@@ -17,9 +26,6 @@ namespace _Project.Scripts.Gameplay.SFX
 
 		public void PlayRepeatedly()
 		{
-			if(sfxHandler.IsPlaying())
-				return;
-				
 			sfxHandler.PlayRepeatedly(audioClipType, this);
 		}
 
@@ -27,5 +33,7 @@ namespace _Project.Scripts.Gameplay.SFX
 		{
 			sfxHandler.StopPlayingRepeatedly(this);
 		}
+
+		#endregion
 	}
 }

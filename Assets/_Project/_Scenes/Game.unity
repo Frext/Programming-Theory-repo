@@ -1096,7 +1096,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e849a916f36d7b94babc451ef95533e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IntObject: {fileID: 11400000, guid: 41c3298dc759c15418d340ed42015d90, type: 2}
+  IntObjectSO: {fileID: 11400000, guid: 41c3298dc759c15418d340ed42015d90, type: 2}
   precedingText: 'wave '
   shouldUpdate: 1
   showingConditions:
@@ -2886,7 +2886,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 47f45ef7b5767674393cc401fc325705, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 0.075
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -6154,30 +6154,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 862289626}
     m_Modifications:
-    - target: {fileID: 1418135575, guid: 917e00053cb499241a1d42e2b2716532, type: 3}
+    - target: {fileID: 1707344284, guid: 917e00053cb499241a1d42e2b2716532, type: 3}
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 2081240095}
-    - target: {fileID: 1418135575, guid: 917e00053cb499241a1d42e2b2716532, type: 3}
+    - target: {fileID: 1707344284, guid: 917e00053cb499241a1d42e2b2716532, type: 3}
       propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[4].m_Target
       value: 
       objectReference: {fileID: 963194231}
-    - target: {fileID: 1418135575, guid: 917e00053cb499241a1d42e2b2716532, type: 3}
+    - target: {fileID: 1707344284, guid: 917e00053cb499241a1d42e2b2716532, type: 3}
       propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[5].m_Target
       value: 
       objectReference: {fileID: 599407818}
-    - target: {fileID: 1418135575, guid: 917e00053cb499241a1d42e2b2716532, type: 3}
+    - target: {fileID: 1707344284, guid: 917e00053cb499241a1d42e2b2716532, type: 3}
       propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[6].m_Target
       value: 
-      objectReference: {fileID: 1140197795}
-    - target: {fileID: 1418135575, guid: 917e00053cb499241a1d42e2b2716532, type: 3}
+      objectReference: {fileID: 963194231}
+    - target: {fileID: 1707344284, guid: 917e00053cb499241a1d42e2b2716532, type: 3}
       propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[7].m_Target
       value: 
-      objectReference: {fileID: 1448393434}
-    - target: {fileID: 1418135575, guid: 917e00053cb499241a1d42e2b2716532, type: 3}
+      objectReference: {fileID: 1140197795}
+    - target: {fileID: 1707344284, guid: 917e00053cb499241a1d42e2b2716532, type: 3}
       propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[8].m_Target
       value: 
-      objectReference: {fileID: 963194231}
+      objectReference: {fileID: 1448393434}
     - target: {fileID: 616289169130688771, guid: 917e00053cb499241a1d42e2b2716532, type: 3}
       propertyPath: cameraControllerScript
       value: 
@@ -6239,7 +6239,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 437961395}
     - target: {fileID: 8279187227318666579, guid: 917e00053cb499241a1d42e2b2716532, type: 3}
-      propertyPath: bloodParticleEffect
+      propertyPath: onSuccessfulAttack.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 871468684}
     m_RemovedComponents: []
@@ -6602,7 +6602,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ShowDebugText: 1
+  m_ShowDebugText: 0
   m_ShowCameraFrustum: 1
   m_IgnoreTimeScale: 0
   m_WorldUpOverride: {fileID: 0}
@@ -6790,7 +6790,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e849a916f36d7b94babc451ef95533e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IntObject: {fileID: 11400000, guid: 41c3298dc759c15418d340ed42015d90, type: 2}
+  IntObjectSO: {fileID: 11400000, guid: 41c3298dc759c15418d340ed42015d90, type: 2}
   precedingText: 
   shouldUpdate: 0
   showingConditions: []

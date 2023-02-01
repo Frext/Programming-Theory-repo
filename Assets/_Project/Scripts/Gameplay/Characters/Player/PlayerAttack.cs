@@ -15,29 +15,21 @@ namespace _Project.Scripts.Gameplay.Characters.Player
 
         private void GetAttackInput()
         {
-            Attack();
-        }
-        
-        // POLYMORPHISM
-        protected override void Attack()
-        {
             if (Input.GetButton("Fire1") && elapsedTime < Time.time)
             {
-                PlayAttackAnimation();
-
-                StartCoroutine(IEnableAttacking(attackColliderEnableDelay));
-                StartCoroutine(IDisableAttacking(attackColliderEnableDelay + attackDuration));
+                Attack();
                 
                 elapsedTime = attackCooldown + Time.time;
             }
         }
 
-        protected override void PlayAttackAnimation()
+        // POLYMORPHISM
+        protected override void Attack()
         {
-            if(characterAnimator.GetCurrentAnimatorStateInfo(0).IsName(characterAttackParamName))
-                return;
-            
-            characterAnimator.SetTrigger(characterAttackParamName);
+            PlayAttackAnimation();
+
+            StartCoroutine(IEnableAttacking(attackColliderEnableDelay));
+            StartCoroutine(IDisableAttacking(attackColliderEnableDelay + attackDuration));
         }
     }
 }

@@ -1,7 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using _Project.Scripts.Gameplay.Data.Scriptable_Object_Templates;
+using _Project.Scripts.Gameplay.Data.Scene.Scriptable_Object_Templates;
+using _Project.Scripts.Gameplay.Managers.Pooling;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -14,12 +15,15 @@ namespace _Project.Scripts.Gameplay.Managers.Waving
         {
             public GameObjectPool gameObjectPool;
             
+            
             [Header("Wave Properties")]
             [Range(0, 10)] public int initialWaveSize;
+            
             [Space]
             [Range(0, 10)] public int waveSizeIncreaseCount;
             [Range(0, 10)] public int increaseWaveSizeAfterWaves;
             public bool canSurviveMultipleWaves;
+            
             [Space]
             public Vector3 spawnRange;
         }
@@ -34,20 +38,19 @@ namespace _Project.Scripts.Gameplay.Managers.Waving
         [Space]
         [Tooltip("A wave object is spawned in a random position, these layers lets us make sure they don't spawn in buildings or so.")]
         [SerializeField] private LayerMask collidableLayers;
-        
-        
-        Dictionary<GameObject, WaveClass> lastSpawnedWaveDictionary = new();
 
+
+        readonly Dictionary<GameObject, WaveClass> lastSpawnedWaveDictionary = new();
+
+        
         void Awake()
         {
             if (waveClasses.Count == 0)
-                enabled = false;
+                throw new Exception("A wave manager cannot be assigned with no " + nameof(waveClasses));
         }
 
         void Start()
         {
-            WaveCountSO.value = 0;
-
             StartCoroutine(IGenerateWaveWhenDead());
         }
 
@@ -55,13 +58,13 @@ namespace _Project.Scripts.Gameplay.Managers.Waving
         {
             while (true)
             {
-                if (IsCurrentWaveDead())
+                if (IsLastSpawnedWaveDead())
                 {
                     yield return new WaitForSeconds(waveInterval);
                     
                     GenerateNewWave();
 
-                    SetRandomPositions();
+                    SetRandomPositionsForLastSpawnedWave();
                 }
                 else
                 {
@@ -70,7 +73,7 @@ namespace _Project.Scripts.Gameplay.Managers.Waving
             }
         }
         
-        private bool IsCurrentWaveDead()
+        private bool IsLastSpawnedWaveDead()
         {
             foreach (KeyValuePair<GameObject, WaveClass> dictionary in lastSpawnedWaveDictionary)
             {
@@ -83,7 +86,8 @@ namespace _Project.Scripts.Gameplay.Managers.Waving
 
         private void GenerateNewWave()
         {
-            WaveCountSO.value++;
+            WaveCountSO.runtimeValue++;
+            
             
             lastSpawnedWaveDictionary.Clear();
 
@@ -92,20 +96,20 @@ namespace _Project.Scripts.Gameplay.Managers.Waving
                 // We subtract 1 from the WaveCount to equalize the right side of the sum to 0
                 // for the initial wave size at the 1st wave.
                 int waveSize = currentWaveClass.initialWaveSize + currentWaveClass.waveSizeIncreaseCount *
-                    ((WaveCountSO.value - 1) / currentWaveClass.increaseWaveSizeAfterWaves);
+                    ((WaveCountSO.runtimeValue - 1) / currentWaveClass.increaseWaveSizeAfterWaves);
                 
                 // We do this check not to get an exception from the game object pool.
                 if (waveSize > 0)
                 {
                     foreach (GameObject newWaveObject in currentWaveClass.gameObjectPool.GetFromQueue(waveSize))
                     {
-                        lastSpawnedWaveDictionary.Add(newWaveObject ,currentWaveClass);
+                        lastSpawnedWaveDictionary.Add(newWaveObject, currentWaveClass);
                     }
                 }
             }
         }
         
-        private void SetRandomPositions()
+        private void SetRandomPositionsForLastSpawnedWave()
         {
             foreach (KeyValuePair<GameObject, WaveClass> dictionary in lastSpawnedWaveDictionary)
             {
@@ -126,16 +130,21 @@ namespace _Project.Scripts.Gameplay.Managers.Waving
                 randomPos.y = Random.Range(basePosition.y, basePosition.y + spawnRange.y);
                 randomPos.z = Random.Range(basePosition.z - spawnRange.z, basePosition.z + spawnRange.z);
                     
-                // If the object is spawned inside a collider, get a random position again.
-                // The Vector3.up multiplier mustn't be greater than the radius. It can cause the editor to freeze.
+                /*  If the object is spawned inside a collider, get a random position again.
+                    The Vector3.up multiplier mustn't be greater than the radius.
+                    It can cause the editor to freeze. */
             } while(Physics.CheckSphere(randomPos + Vector3.up * 3, 2f, collidableLayers));
 
             return randomPos;
         }
 
+        #region Methods Used By Other Scripts
+
         public void StopSpawningWaves()
         {
             CancelInvoke();
         }
+
+        #endregion
     }
 }

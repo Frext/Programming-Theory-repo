@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Cinemachine;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace _Project.Scripts.Camera
 {
@@ -53,6 +51,7 @@ namespace _Project.Scripts.Camera
 
 
         [Header("Player Properties")]
+        
         [Tooltip("This is the transform that camera will rotate around the y-axis.")]
         [SerializeField] private Transform orientation;
 
@@ -74,43 +73,13 @@ namespace _Project.Scripts.Camera
             Cursor.visible = false;
         }
 
-        // This method is used when the game over UI is showed to activate the cursor.
-        public void UnlockCursor()
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
-
         void Update()
         {
             HandleCameraSwitch();
             
-            HandleMouseInput();
-        }
-        
-        private void HandleMouseInput()
-        {
-            float mouseX = Input.GetAxisRaw("Mouse X") * mouseSensitivity;
-            float mouseY = Input.GetAxisRaw("Mouse Y") * mouseSensitivity;
-
-            yRotation += mouseX;
-
-            xRotation -= mouseY;
-            xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+            GetMouseInput();
             
-            
-            HandleCurrentCameraRotationPreferences();
-
-            cameraClassList[CurrentCameraTransformIndex].cameraObject.transform.rotation = 
-                Quaternion.Euler(xRotation, yRotation, 0);
-           
-            orientation.rotation = Quaternion.Euler(0, yRotation, 0);
-        }
-
-        private void HandleCurrentCameraRotationPreferences()
-        {
-            if (!cameraClassList[CurrentCameraTransformIndex].rotateX)
-                xRotation = 0;
+            SetRotation();
         }
 
         private void HandleCameraSwitch()
@@ -120,11 +89,50 @@ namespace _Project.Scripts.Camera
                 CurrentCameraTransformIndex ++;
             }
         }
+        
+        private void GetMouseInput()
+        {
+            float mouseX = Input.GetAxisRaw("Mouse X") * mouseSensitivity;
+            float mouseY = Input.GetAxisRaw("Mouse Y") * mouseSensitivity;
+
+            yRotation += mouseX;
+
+            xRotation -= mouseY;
+            xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+            
+            ApplyCurrentCameraRotationPreferences();
+        }
+
+        private void ApplyCurrentCameraRotationPreferences()
+        {
+            // If the camera doesn't rotate in the x-axis, set the x rotation to 0.
+            if (!cameraClassList[CurrentCameraTransformIndex].rotateX)
+                xRotation = 0;
+        }
+        
+        private void SetRotation()
+        {
+            cameraClassList[CurrentCameraTransformIndex].cameraObject.transform.rotation = 
+                Quaternion.Euler(xRotation, yRotation, 0);
+           
+            orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+        }
+
+        #region Methods Used By Other Scripts
+        
+        // This method is used when the game over UI is showed to activate the cursor.
+        public void UnlockCursor()
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
 
         // This method is used by the player movement script.
         public Transform GetOrientationObject()
         {
             return orientation;
         }
+
+        #endregion
     }
 }

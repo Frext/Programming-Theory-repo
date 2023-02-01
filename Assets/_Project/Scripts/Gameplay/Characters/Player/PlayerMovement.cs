@@ -1,15 +1,15 @@
 using System.Collections;
 using _Project.Scripts.Camera;
-using _Project.Scripts.Gameplay.SFX;
+using _Project.Scripts.Gameplay.Managers.SFX;
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace _Project.Scripts.Gameplay.Characters.Player
 {
     [RequireComponent(typeof(Rigidbody))]
     public class PlayerMovement : MonoBehaviour
     {
-        [Header("Movement")]
+        [Header("Ground Movement")]
         [Range(0, 30)] [SerializeField] private float maxMoveSpeed = 12;
         [Range(0, 1)] [SerializeField] private float moveBackwardsMultiplier = 0.75f;
         
@@ -18,36 +18,27 @@ namespace _Project.Scripts.Gameplay.Characters.Player
         
         [Space]
         [SerializeField] private SFXElement movementSFXElement;
-
-        Transform orientation;
         
         float horizontalInput;
         float verticalInput;
-
         Vector3 moveDirection;
-
+        Transform orientation;
         bool isMovingBackwards;
-
         Rigidbody playerRb;
 
         
         [Header("Jump")]
-        [Range(0, 20)]
-        [SerializeField] private float jumpForce;
-        [Range(0, 5)]
-        [SerializeField] private float jumpCooldown;
-        [Range(0, 10)]
-        [SerializeField] private float fallMultiplier;
-        [Range(0, 10)]
-        [SerializeField] private float airMultiplier;
+        [Range(0, 20)] [SerializeField] private float jumpForce;
+        [Range(0, 5)] [SerializeField] private float jumpCooldown;
+        [Range(0, 10)] [SerializeField] private float fallMultiplier;
+        [Range(0, 10)] [SerializeField] private float airMultiplier;
 
         bool isReadyToJump;
 
 
         [Header("Ground Check")]
-        [Range(0,10)]
-        [SerializeField] private float jumpRangeFromGround;
-        [SerializeField] private float groundDrag;
+        [Range(0,10)] [SerializeField] private float jumpRangeFromGround;
+        [Range(0,20)] [SerializeField] private float groundDrag;
         [SerializeField] private LayerMask groundLayer;
 
         bool isPlayerGrounded;
@@ -55,27 +46,27 @@ namespace _Project.Scripts.Gameplay.Characters.Player
         
         [Header("Animation")] 
         [SerializeField] private Animator playerAnimator;
-        
-        private static readonly int AnimPara_MoveX = Animator.StringToHash("MoveX");
-        private static readonly int AnimPara_MoveZ = Animator.StringToHash("MoveZ");
-        private static readonly int AnimPara_IsGrounded = Animator.StringToHash("isGrounded");
-        
+        [SerializeField] private string animXVelocityFloatParam = "MoveX";
+        [SerializeField] private string animZVelocityFloatParam = "MoveZ";
+        [SerializeField] private string animIsGroundedBoolParam = "isGrounded";
+
         const float ANIM_LERP_MULTIPLIER = 8.9f;
 
         
         void Start()
         {
+            
             orientation = cameraControllerScript.GetOrientationObject();
 
             isMovingBackwards = false;
-            
-            isReadyToJump = true;
-            
-            
+
             playerRb = GetComponent<Rigidbody>();
             
             // If rotation is not frozen, the player falls over
             playerRb.freezeRotation = true;
+            
+            
+            isReadyToJump = true;
         }
 
         void Update()
@@ -97,14 +88,14 @@ namespace _Project.Scripts.Gameplay.Characters.Player
 
                 Jump();
 
-                // This lets you jump again when you hold the jump button.
+                // This lets you jump repeatedly when you hold the jump button.
                 StartCoroutine(IResetJumpState());
             }
         }
 		
 		private void Jump()
         {
-            // reset y velocity to jump the exact same amount every time
+            // Reset the y velocity to jump the exact same amount every time
             playerRb.velocity = new Vector3(playerRb.velocity.x, 0f, playerRb.velocity.z);
             
             playerRb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
@@ -122,6 +113,7 @@ namespace _Project.Scripts.Gameplay.Characters.Player
             Vector3 flatVelocity = new Vector3(playerRb.velocity.x, 0f, playerRb.velocity.z);
             
             // If you are moving backwards, the speed limit is lower than usual.
+            // That means you move slower than usual.
             if (isMovingBackwards && flatVelocity.magnitude >= maxMoveSpeed * moveBackwardsMultiplier)
             {
                 Vector3 limitedVelocity = flatVelocity.normalized * (maxMoveSpeed * moveBackwardsMultiplier);
@@ -144,14 +136,14 @@ namespace _Project.Scripts.Gameplay.Characters.Player
 
             MovePlayer();
             
-            UpdateMoveBackwardsState();
+            UpdateMovingBackwardsState();
             
             FallFaster();
             
             
             PlayMovementSFX();
 
-            RefreshAnimator();
+            UpdateMovementAnimation();
         }
 
         private void UpdatePlayerGroundState()
@@ -180,7 +172,7 @@ namespace _Project.Scripts.Gameplay.Characters.Player
             }
         }
 
-        private void UpdateMoveBackwardsState()
+        private void UpdateMovingBackwardsState()
         {
             isMovingBackwards = Vector3.Dot(orientation.forward, moveDirection) < -.5f;
         }
@@ -195,7 +187,10 @@ namespace _Project.Scripts.Gameplay.Characters.Player
 
         private void PlayMovementSFX()
         {
-            if (playerRb.velocity.magnitude > 0.5f)
+            if (movementSFXElement == null)
+                return;
+
+            if (playerRb.velocity.magnitude > 0.75f && isPlayerGrounded)
             {
                 movementSFXElement.PlayRepeatedly();
             }
@@ -205,24 +200,31 @@ namespace _Project.Scripts.Gameplay.Characters.Player
             }
         }
 
-        private void RefreshAnimator()
+        private void UpdateMovementAnimation()
         {
-            playerAnimator.SetBool(AnimPara_IsGrounded, isPlayerGrounded);
+            playerAnimator.SetBool(animIsGroundedBoolParam, isPlayerGrounded);
             
             // The velocity lerp lets us have a smoother transition between the animation states.
             // The additions in the second lerp argument lets us have the velocity by direction,
             // therefore we can set the animation parameters accurately.
+            playerAnimator.SetFloat(animXVelocityFloatParam, 
+                Mathf.Lerp(playerAnimator.GetFloat(animXVelocityFloatParam) ,
+                    playerRb.velocity.x * orientation.right.x + playerRb.velocity.z * orientation.right.z, 
+                    ANIM_LERP_MULTIPLIER * Time.fixedDeltaTime));
             
-            playerAnimator.SetFloat(AnimPara_MoveX, Mathf.Lerp(playerAnimator.GetFloat(AnimPara_MoveX) ,playerRb.velocity.x * orientation.right.x +
-                playerRb.velocity.z * orientation.right.z, ANIM_LERP_MULTIPLIER * Time.fixedDeltaTime));
-            
-            playerAnimator.SetFloat(AnimPara_MoveZ, Mathf.Lerp(playerAnimator.GetFloat(AnimPara_MoveZ) ,playerRb.velocity.z * orientation.forward.z +
-                playerRb.velocity.x * orientation.forward.x, ANIM_LERP_MULTIPLIER * Time.fixedDeltaTime));
+            playerAnimator.SetFloat(animZVelocityFloatParam, 
+                Mathf.Lerp(playerAnimator.GetFloat(animZVelocityFloatParam) ,
+                    playerRb.velocity.z * orientation.forward.z + playerRb.velocity.x * orientation.forward.x,
+                    ANIM_LERP_MULTIPLIER * Time.fixedDeltaTime));
         }
+
+        #region Methods Used By Other Scripts
 
         public void RigidbodyDie()
         {
             playerRb.constraints = RigidbodyConstraints.FreezePosition;
         }
+
+        #endregion
     }
 }

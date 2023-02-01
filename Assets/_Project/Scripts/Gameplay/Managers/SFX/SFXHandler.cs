@@ -3,16 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace _Project.Scripts.Gameplay.SFX
+namespace _Project.Scripts.Gameplay.Managers.SFX
 {
-
-	
 	public class SFXHandler : MonoBehaviour
 	{
 		[Header("Audio System References")]
 		[SerializeField] private AudioSource mainAudioSource;
-
-		[Serializable]
+		
 		public enum AudioClipTypes
 		{
 			Footsteps,
@@ -29,17 +26,25 @@ namespace _Project.Scripts.Gameplay.SFX
 		
 		[Space]
 		[SerializeField] private List<AudioClipClass> audioClipClassList = new ();
-		
+
+		void Start()
+		{
+			if (mainAudioSource == null)
+				throw new Exception("An SFXHandler cannot be assigned with no " + nameof(mainAudioSource));
+		} 
+
+		#region Methods Used By Other Scripts
+
 		public void PlayOneShotSound(AudioClipTypes audioClipType, SFXElement callerSFXElement)
 		{
-			CheckIfSFXElement(callerSFXElement);
+			CheckIfCallerIsValid(callerSFXElement);
 			
 			
 			mainAudioSource.PlayOneShot(
 				GetAudioClipFromType(audioClipType), mainAudioSource.volume);
 		}
 		
-		private void CheckIfSFXElement(SFXElement callerSFXElement)
+		private void CheckIfCallerIsValid(SFXElement callerSFXElement)
 		{
 			if (callerSFXElement == null)
 				throw new Exception("SFXHandler cannot be called without an SFXElement.");
@@ -62,7 +67,10 @@ namespace _Project.Scripts.Gameplay.SFX
 
 		public void PlayRepeatedly(AudioClipTypes audioClipType, SFXElement callerSFXElement)
 		{
-			CheckIfSFXElement(callerSFXElement);
+			CheckIfCallerIsValid(callerSFXElement);
+
+			if (mainAudioSource.isPlaying)
+				return;
 			
 			
 			mainAudioSource.clip = GetAudioClipFromType(audioClipType);
@@ -71,15 +79,13 @@ namespace _Project.Scripts.Gameplay.SFX
 		
 		public void StopPlayingRepeatedly(SFXElement callerSFXElement)
 		{
-			CheckIfSFXElement(callerSFXElement);
+			CheckIfCallerIsValid(callerSFXElement);
 			
-			// Don't call stop, because it stops the other PlayOneShot calls.
+			
+			// Don't call the Stop() method, because it stops the other PlayOneShot calls.
 			mainAudioSource.clip = null;
 		}
 		
-		public bool IsPlaying()
-		{
-			return mainAudioSource.isPlaying;
-		}
+		#endregion
 	}
 }

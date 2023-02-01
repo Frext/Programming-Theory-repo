@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace _Project.Scripts.Gameplay.Managers
+namespace _Project.Scripts.Gameplay.Managers.Pooling
 {
 	public class GameObjectPoolElement : MonoBehaviour
 	{

@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using _Project.Scripts.Gameplay.Data.Scriptable_Object_Templates;
+using _Project.Scripts.Gameplay.Data.Scene.Scriptable_Object_Templates;
 using TMPro;
 using UnityEngine;
 
@@ -22,14 +22,16 @@ namespace _Project.Scripts.UI
 			public int value;
 		}
 		
-		[SerializeField] private IntObject IntObject;
+		[SerializeField] private IntObject IntObjectSO;
+		
 		[Space]
 		[SerializeField] private string precedingText = string.Empty;
 		[SerializeField] private bool shouldUpdate;
 
 		TextMeshProUGUI textMeshPro;
-
-		[Space]
+		
+		
+		[Header("Conditions")]
 		[SerializeField] private List<IntShowCondition> showingConditions;
  
 		void Awake()
@@ -49,12 +51,12 @@ namespace _Project.Scripts.UI
 		{
 			SetCorrespondingTextVisibility();
 			
-			textMeshPro.SetText(precedingText + IntObject.value);
+			textMeshPro.SetText(precedingText + IntObjectSO.runtimeValue);
 		}
 
 		private void SetCorrespondingTextVisibility()
 		{
-			int currentValue = IntObject.value;
+			int currentValue = IntObjectSO.runtimeValue;
 			
 			foreach (IntShowCondition showCondition in showingConditions)
 			{
@@ -72,7 +74,8 @@ namespace _Project.Scripts.UI
 						else
 							HideTextMesh();
 						break;
-					
+
+					case IntShowCondition.Conditions.EqualTo:
 					default:
 						if (currentValue == showCondition.value)
 							ShowTextMesh();
@@ -83,16 +86,16 @@ namespace _Project.Scripts.UI
 			}
 		}
 		
+		private void ShowTextMesh()
+		{
+			textMeshPro.enabled = true;
+		}
+		
 		private void HideTextMesh()
 		{
 			textMeshPro.enabled = false;
 		}
 		
-		private void ShowTextMesh()
-		{
-			textMeshPro.enabled = true;
-		}
-
 		void Update()
 		{
 			UpdateText();

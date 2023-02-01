@@ -12,6 +12,8 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/24d45e813e524a99bfb7a145158a7980157a00/78/a584b269/MonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Editor/Characters/PlayerHealthDrawer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/HelperMethodsUtil.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Pickups/HealthPickup.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/UI/SceneLoader.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/UI/ShowIntObject.cs" root0="FORCE_HIGHLIGHTING" />
@@ -197,7 +199,12 @@
       <workItem from="1675156641282" duration="2522000" />
       <workItem from="1675185889391" duration="2239000" />
       <workItem from="1675196259456" duration="5576000" />
-      <workItem from="1675202444545" duration="329000" />
+      <workItem from="1675202444545" duration="1008000" />
+      <workItem from="1675254237881" duration="1512000" />
+      <workItem from="1675263797228" duration="2368000" />
+      <workItem from="1675270131577" duration="3759000" />
+      <workItem from="1675279054367" duration="6245000" />
+      <workItem from="1675285712667" duration="3058000" />
     </task>
     <servers />
   </component>
