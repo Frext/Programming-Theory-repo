@@ -9,9 +9,7 @@ namespace _Project.Scripts.Gameplay.Characters.Enemy
         [Range(0, 10)] [SerializeField] private float attackRange;
 
         [Header("Detect Player")]
-        
-        [Tooltip("This script is used for getting the layer mask of player.")]
-        [SerializeField] private ChasePlayer chasePlayerScript;
+        [SerializeField] private LayerMask playerLayerMask;
         
 
         float elapsedTime;
@@ -27,7 +25,7 @@ namespace _Project.Scripts.Gameplay.Characters.Enemy
         
         private bool IsPlayerInAttackRange()
         {
-            return Physics.CheckSphere(transform.position, attackRange, chasePlayerScript.GetPlayerLayerMask());
+            return Physics.CheckSphere(transform.position, attackRange, playerLayerMask);
         }
 
         protected override void Attack()

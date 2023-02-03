@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace _Project.Scripts.Gameplay.Characters.Common
 {
@@ -31,7 +30,7 @@ namespace _Project.Scripts.Gameplay.Characters.Common
 
         protected abstract void Attack();
 
-        protected void PlayAttackAnimation()
+        protected virtual void PlayAttackAnimation()
         {
             characterAnimator.SetTrigger(animAttackTriggerParam);
         }

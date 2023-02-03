@@ -1,8 +1,7 @@
 using System.Collections;
-using _Project.Scripts.Camera;
 using _Project.Scripts.Gameplay.Managers.SFX;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.Events;
 
 namespace _Project.Scripts.Gameplay.Characters.Player
 {
@@ -12,17 +11,18 @@ namespace _Project.Scripts.Gameplay.Characters.Player
         [Header("Ground Movement")]
         [Range(0, 30)] [SerializeField] private float maxMoveSpeed = 12;
         [Range(0, 1)] [SerializeField] private float moveBackwardsMultiplier = 0.75f;
-        
-        [Tooltip("This script is needed to get the orientation object automatically.")]
-        [SerializeField] private CameraController cameraControllerScript;
+        [SerializeField] private Transform orientationTransform;
+
+        [Space]
+        [Tooltip("This is for ground movement, not jumping or etc.")]
+        [SerializeField] private UnityEvent onMovementStart;
         
         [Space]
-        [SerializeField] private SFXElement movementSFXElement;
-        
+        [SerializeField] private UnityEvent onMovementStop;
+
         float horizontalInput;
         float verticalInput;
         Vector3 moveDirection;
-        Transform orientation;
         bool isMovingBackwards;
         Rigidbody playerRb;
 
@@ -55,9 +55,6 @@ namespace _Project.Scripts.Gameplay.Characters.Player
         
         void Start()
         {
-            
-            orientation = cameraControllerScript.GetOrientationObject();
-
             isMovingBackwards = false;
 
             playerRb = GetComponent<Rigidbody>();
@@ -141,7 +138,7 @@ namespace _Project.Scripts.Gameplay.Characters.Player
             FallFaster();
             
             
-            PlayMovementSFX();
+            InvokeMovementEvents();
 
             UpdateMovementAnimation();
         }
@@ -159,7 +156,7 @@ namespace _Project.Scripts.Gameplay.Characters.Player
 
         private void MovePlayer()
         {
-            moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+            moveDirection = orientationTransform.forward * verticalInput + orientationTransform.right * horizontalInput;
             moveDirection.Normalize();
 
             if (isPlayerGrounded)
@@ -174,7 +171,7 @@ namespace _Project.Scripts.Gameplay.Characters.Player
 
         private void UpdateMovingBackwardsState()
         {
-            isMovingBackwards = Vector3.Dot(orientation.forward, moveDirection) < -.5f;
+            isMovingBackwards = Vector3.Dot(orientationTransform.forward, moveDirection) < -.5f;
         }
 
         private void FallFaster()
@@ -185,18 +182,15 @@ namespace _Project.Scripts.Gameplay.Characters.Player
             }
         }
 
-        private void PlayMovementSFX()
+        private void InvokeMovementEvents()
         {
-            if (movementSFXElement == null)
-                return;
-
             if (playerRb.velocity.magnitude > 0.75f && isPlayerGrounded)
             {
-                movementSFXElement.PlayRepeatedly();
+                onMovementStart.Invoke();
             }
             else
             {
-                movementSFXElement.StopPlayingRepeatedly();
+                onMovementStop.Invoke();
             }
         }
 
@@ -209,12 +203,12 @@ namespace _Project.Scripts.Gameplay.Characters.Player
             // therefore we can set the animation parameters accurately.
             playerAnimator.SetFloat(animXVelocityFloatParam, 
                 Mathf.Lerp(playerAnimator.GetFloat(animXVelocityFloatParam) ,
-                    playerRb.velocity.x * orientation.right.x + playerRb.velocity.z * orientation.right.z, 
+                    playerRb.velocity.x * orientationTransform.right.x + playerRb.velocity.z * orientationTransform.right.z, 
                     ANIM_LERP_MULTIPLIER * Time.fixedDeltaTime));
             
             playerAnimator.SetFloat(animZVelocityFloatParam, 
                 Mathf.Lerp(playerAnimator.GetFloat(animZVelocityFloatParam) ,
-                    playerRb.velocity.z * orientation.forward.z + playerRb.velocity.x * orientation.forward.x,
+                    playerRb.velocity.z * orientationTransform.forward.z + playerRb.velocity.x * orientationTransform.forward.x,
                     ANIM_LERP_MULTIPLIER * Time.fixedDeltaTime));
         }
 

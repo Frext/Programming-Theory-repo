@@ -14,11 +14,23 @@ namespace _Project.Scripts.Gameplay.Characters.Player
         {
             base.Start();
             
+            UpdatePlayerHealthSO();
+        }
+
+        private void UpdatePlayerHealthSO()
+        {
             if(playerHealthSO != null)
                 playerHealthSO.runtimeValue = Health;
         }
 
         #region Methods Used By Other Scripts
+        
+        public override void TakeDamage(int damageAmount)
+        {
+            base.TakeDamage(damageAmount);
+            
+            UpdatePlayerHealthSO();
+        }
         
         public bool IncreaseHealth(int amount)
         {

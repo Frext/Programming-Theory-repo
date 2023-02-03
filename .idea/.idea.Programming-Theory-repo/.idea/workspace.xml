@@ -39,7 +39,7 @@
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.appearance&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -51,6 +51,14 @@
   }
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/../../../../../oyun\Programming Theory Project.exe" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\furka\Desktop\oyun" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2021.3.9f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath &quot;C:\Users\furka\Desktop\Programming\Unity\Unity-Projects\2 - Unity Learn\Programming-Theory-repo&quot; -debugCodeOptimization" />
@@ -205,6 +213,12 @@
       <workItem from="1675270131577" duration="3759000" />
       <workItem from="1675279054367" duration="6245000" />
       <workItem from="1675285712667" duration="3058000" />
+      <workItem from="1675429934716" duration="3932000" />
+      <workItem from="1675435898353" duration="59000" />
+      <workItem from="1675436186936" duration="827000" />
+      <workItem from="1675457444399" duration="1042000" />
+      <workItem from="1675458505403" duration="2694000" />
+      <workItem from="1675461707197" duration="344000" />
     </task>
     <servers />
   </component>

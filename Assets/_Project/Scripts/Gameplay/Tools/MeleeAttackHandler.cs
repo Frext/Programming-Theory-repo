@@ -15,7 +15,6 @@ namespace _Project.Scripts.Gameplay.Tools
         
         
         [Header("References")]
-        [SerializeField] private AttackManager attackManager;
         
         [Tooltip("The collider is needed not to injure the melee owner.")]
         [SerializeField] private Collider _attackerCollider;

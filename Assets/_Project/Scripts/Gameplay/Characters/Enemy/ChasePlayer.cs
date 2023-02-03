@@ -23,7 +23,7 @@ namespace _Project.Scripts.Gameplay.Characters.Enemy
         [SerializeField] private float sightRange = 30f;
         
         [Tooltip("The speed of rotating the enemy towards the player")]
-        [SerializeField] private float rotateSpeed = 0.4f;
+        [SerializeField] private float rotateSpeed = 1f;
         
         
         [Header("Navigation")]
@@ -45,6 +45,9 @@ namespace _Project.Scripts.Gameplay.Characters.Enemy
         void Start()
         {
             playerTransform = _playerCollider.gameObject.transform;
+            
+            
+            rotateSpeed *= 10;
         }
 
         void Update()
@@ -68,7 +71,6 @@ namespace _Project.Scripts.Gameplay.Characters.Enemy
                 
                 elapsedTime = Time.time + playerChasingDurationAfterDisappearing;
             }
-            // If the game is just started, elapsedTime could be greater than Time.time accidentally.
             if (elapsedTime > Time.time)
             {
                 // If the enemy is currently attacking, don't move the enemy. If not, move the enemy
@@ -97,16 +99,7 @@ namespace _Project.Scripts.Gameplay.Characters.Enemy
             // I didn't use player transform straightaway because we need a look rotation just on the y-axis.
             Vector3 targetRotation = (playerTransform.position - transform.position).normalized;
 
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(targetRotation), rotateSpeed);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(targetRotation), rotateSpeed * Time.deltaTime);
         }
-
-        #region Methods Used By Other Scripts
-
-        public LayerMask GetPlayerLayerMask()
-        {
-            return playerLayerMask;
-        }
-
-        #endregion
     }
 }

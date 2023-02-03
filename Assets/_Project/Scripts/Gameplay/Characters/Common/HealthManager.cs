@@ -51,7 +51,7 @@ namespace _Project.Scripts.Gameplay.Characters.Common
 
         #region Methods Used By Other Scripts
 
-        public void TakeDamage(int damageAmount)
+        public virtual void TakeDamage(int damageAmount)
         {
             Health -= damageAmount;
 
