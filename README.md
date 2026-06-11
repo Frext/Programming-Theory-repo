@@ -17,6 +17,17 @@ Want to skip the code and just play?
 
 ---
 
+## 🎮 Controls
+
+| Key | Action |
+| :---: | :--- |
+| **W A S D** | Move Character |
+| **SPACE** | Jump |
+| **MOUSE 1** | Attack |
+| **V** | Switch Camera Perspective |
+
+---
+
 ## 🧠 OOP Implementation
 
 - **Inheritance:** `PlayerHealth` and `EnemyHealth` inherit from `HealthManager`; `PlayerAttack` and `EnemyAttack` inherit from `AttackManager`
@@ -26,7 +37,13 @@ Want to skip the code and just play?
 
 ---
 
-**Unity Junior Programmer Pathway / Submission: Programming theory in action**
+## 🛠️ Built With
+
+* **Engine:** Unity (2021.3.9f1)
+* **Language:** C#
+* **Course:** Unity Junior Programmer Pathway (Submission: Programming Theory in Action)
+
+---
 
 **2023**
 
