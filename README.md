@@ -1,4 +1,4 @@
-# Programming-Theory-repo
+# Programming Theory Project
 A simple 3D game where you fight waves of enemies and pick up health packs to stay alive. 
 
 It was built in Unity to demonstrate the four pillars of Object-Oriented Programming (OOP): Inheritance, Polymorphism, Abstraction, and Encapsulation.
